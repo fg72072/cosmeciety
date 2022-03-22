@@ -28,6 +28,7 @@ class CreateOrdersTable extends Migration
             $table->string('country_id');
             $table->string('city_id');
             $table->string('postal_code');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

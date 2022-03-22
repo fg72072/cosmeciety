@@ -20,6 +20,7 @@ class CreateInventoriesTable extends Migration
             $table->integer('qty');
             $table->float('total_purchase_price');
             $table->string('stock_type');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

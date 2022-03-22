@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->float('price');
             $table->string('description')->nullable();
             $table->string('status')->enum(['0','1'])->default('0')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

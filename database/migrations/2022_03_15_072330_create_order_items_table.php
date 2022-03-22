@@ -21,6 +21,7 @@ class CreateOrderItemsTable extends Migration
             $table->integer('qty')->nullable();
             $table->float('total');
             $table->float('discount')->default(0)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

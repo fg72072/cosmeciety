@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('status')->enum(['0','1'])->default('0')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

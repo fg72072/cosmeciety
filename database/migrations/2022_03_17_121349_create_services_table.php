@@ -18,6 +18,7 @@ class CreateServicesTable extends Migration
             $table->string('user_id');
             $table->float('price');
             $table->text('description');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

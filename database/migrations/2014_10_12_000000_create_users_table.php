@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->text('location')->nullable();
             $table->string('status')->enum(['0','1'])->default('0')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

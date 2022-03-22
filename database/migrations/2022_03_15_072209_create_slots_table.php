@@ -15,6 +15,7 @@ class CreateSlotsTable extends Migration
     {
         Schema::create('slots', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
