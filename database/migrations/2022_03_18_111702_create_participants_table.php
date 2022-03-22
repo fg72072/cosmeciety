@@ -18,6 +18,7 @@ class CreateParticipantsTable extends Migration
             $table->string('user_id');
             $table->string('title');
             $table->string('description');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -16,6 +16,7 @@ class CreateDeliveryStatusesTable extends Migration
         Schema::create('delivery_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -26,6 +26,7 @@ class CreateContestsTable extends Migration
             $table->string('post_live_date')->nullable();
             $table->string('announce_date')->nullable();
             $table->string('status')->enum(['0','1'])->default('0')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

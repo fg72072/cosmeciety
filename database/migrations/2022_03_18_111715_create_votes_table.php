@@ -18,6 +18,7 @@ class CreateVotesTable extends Migration
             $table->string('user_id');
             $table->string('participate_id');
             $table->string('vote');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

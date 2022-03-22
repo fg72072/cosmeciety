@@ -20,6 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->float('amount');
             $table->string('description')->nullable();
             $table->string('type')->enum(['0','1','2'])->default('0')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
