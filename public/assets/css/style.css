@@ -21062,7 +21062,12 @@ dl li {
 .custom-form-width{
 	width: 500px;
 }
-
+.radius-50{
+	border-radius: 50px;
+}
+.custom-margin-top-verify{
+	margin-top: 7rem;
+}
 @media (max-width: 600px) {
 	.custom-form-width{
 		width: 90%;

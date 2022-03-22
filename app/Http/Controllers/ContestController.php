@@ -103,8 +103,8 @@ class ContestController extends Controller
 
     public function destroy($id)
     {
-        $post = Post::where('id',$id);
-        $post->delete();
+        $contest = Contest::where('id',$id);
+        $contest->delete();
         return back();
     }
 }

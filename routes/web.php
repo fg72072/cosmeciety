@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Session;
 
 
 Auth::routes();
+Auth::routes(['verify' => true]);
 
-
-Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => '', 'middleware' => ['auth','verified']], function () {
     Route::get('/', 'IndexController@index')->middleware(['role:seller|super-admin','permission:View']);
     Route::get('admin/404', function () {
         return view('404');
