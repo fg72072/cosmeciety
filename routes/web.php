@@ -42,8 +42,8 @@ Route::group(['prefix' => '', 'middleware' => ['auth','verified']], function () 
     Route::group(['prefix' => 'user'], function () {
         Route::group(['middleware' => ['role:super-admin']], function () {
             Route::get('/', 'UserController@index');
-            Route::get('/create', 'UserController@create');
-            Route::post('/create', 'UserController@store')->name('user.store');
+            // Route::get('/create', 'UserController@create');
+            // Route::post('/create', 'UserController@store')->name('user.store');
             Route::post('/delete/{id}', 'UserController@destroy');
         });
         Route::get('/edit/{id}', 'UserController@edit')->middleware('role:seller|super-admin');
@@ -51,8 +51,8 @@ Route::group(['prefix' => '', 'middleware' => ['auth','verified']], function () 
     });
 
     Route::group(['prefix' => 'category'], function () {
-        Route::get('/', 'CategoryController@index')->middleware('role:seller|super-admin');
         Route::group(['middleware' => ['role:super-admin']], function () {
+            Route::get('/', 'CategoryController@index');
             Route::get('/create', 'CategoryController@create');
             Route::post('/create', 'CategoryController@store')->name('category.store');
             Route::post('/delete/{id}', 'CategoryController@destroy');
