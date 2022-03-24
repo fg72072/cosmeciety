@@ -62,13 +62,14 @@
             <li class="nav-item">
               <a class="nav-link" href="{{url('user')}}">List</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="{{url('user/create')}}">Add</a>
-            </li>
+            </li> --}}
           </ul>
         </div>
       </li>
       @endrole
+      @role('super-admin')
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#category" aria-expanded="false" aria-controls="category">
           <i class="mdi mdi-content-cut menu-icon"></i>
@@ -80,14 +81,13 @@
             <li class="nav-item">
               <a class="nav-link" href="{{url('category')}}">List</a>
             </li>
-            @role('super-admin')
             <li class="nav-item">
               <a class="nav-link" href="{{url('category/create')}}">Add</a>
             </li>
-            @endrole
           </ul>
         </div>
       </li>
+      @endrole
       @role('seller')
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#order" aria-expanded="false" aria-controls="order">
