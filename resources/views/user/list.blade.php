@@ -51,10 +51,17 @@
                     {{-- <td>{{$user->operational_hours ?? '-' }}</td> --}}
                     <td>{{$user->location ?? '-' }}</td>
                     <td>
-                      @if ($user->status == 1)  
-                      <label class="badge badge-success">Active</label>
-                      @else
-                      <label class="badge badge-danger">Unactive</label>
+                      @if ($user->id != Auth::user()->id)
+                      <form action="{{url('user/update-status/'.$user->id)}}" method="post" class="update-status-form">
+                        @csrf
+                        @if ($user->status == 1)  
+                        <input type="hidden" name="status" value="0">
+                        <label class="badge badge-success update-status">Active</label>
+                        @else
+                        <input type="hidden" name="status" value="1">
+                        <label class="badge badge-danger update-status">Unactive</label>
+                        @endif
+                      </form>
                       @endif
                     </td>
                     <td>

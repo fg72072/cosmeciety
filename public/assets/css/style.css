@@ -21068,6 +21068,14 @@ dl li {
 .custom-margin-top-verify{
 	margin-top: 7rem;
 }
+.update-status{
+cursor: pointer;
+}
+.add-btn-section{
+	display: flex;
+	justify-content: end;
+	margin-bottom: 2rem;
+}
 @media (max-width: 600px) {
 	.custom-form-width{
 		width: 90%;

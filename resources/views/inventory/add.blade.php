@@ -3,11 +3,11 @@
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title">Add Inventory</h3>
+        <h3 class="page-title">Inventory Section</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page"> Add Inventory </li>
+            <li class="breadcrumb-item active" aria-current="page"> Inventory Section </li>
           </ol>
         </nav>
       </div>
