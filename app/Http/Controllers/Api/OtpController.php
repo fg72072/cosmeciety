@@ -52,6 +52,10 @@ class OtpController extends Controller
     }
     public function otpVerify(Request $req)
     {
+        $validate = Request()->validate([
+            'user' => 'required',
+            'otp' => 'required',
+        ]);
         $otp = AppOtp::orderBy('id','desc')->with('user')->whereHas('user',function($q) use($req){
             $q->where('email',$req->user)->orWhere('phone',$req->user);
         })->where('otp',$req->otp)->where('verify','0')->first();

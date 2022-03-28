@@ -28,6 +28,23 @@ class AuthController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
+    public function forMe(Request $request)
+    {
+        $input = $request->only('email', 'password');
+        $token = null;
+
+        if (!$token = JWTAuth::attempt($input)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid Email or Password',
+            ], 401);
+        }
+
+        return response()->json([
+            'success' => true,
+            'token' => $token,
+        ]);
+    }
     public function login(Request $request)
     {
         $validate = Request()->validate([
@@ -129,7 +146,10 @@ class AuthController extends Controller
 
     public function reset(Request $req)
     {
-      
+        $validate = Request()->validate([
+            'user' => 'required',
+            'otp' => 'required',
+        ]);
         $otp = AppOtp::orderBy('id','desc')->with('user')->whereHas('user',function($q) use($req){
             $q->where('email',$req->user)->orWhere('phone',$req->user);
         })->where('otp',$req->otp)->where('verify','0')->first();
@@ -139,7 +159,7 @@ class AuthController extends Controller
             $validate = Request()->validate([
                 'password' => 'required|min:8|confirmed',
             ]);
-            $otp->user->password = $req->password;
+            $otp->user->password = Hash::make($req->password);
             $otp->user->save();
             if (!$token = JWTAuth::fromUser($otp->user)) {
                 return response()->json([
