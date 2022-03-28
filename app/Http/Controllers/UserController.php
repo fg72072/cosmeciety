@@ -65,14 +65,14 @@ class UserController extends Controller
         if($role[0] != 'super-admin' && Auth::user()->id != $id){
             return abort(403,'User does not have the right roles.');
         }
-        $user = User::find($id);
+        $user = User::find(Auth::user()->id);
         return view('user.edit',compact('user'));
     }
 
     public function update($id,Request $req)
     {
         $email_validate = "required";
-        $user = User::find($id);
+        $user = User::find(Auth::user()->id);
         if ($req->hasFile('image')) {
             $image = $req->file('image');
             $this->media->unlinkProfilePic($user->img,'user');
@@ -148,6 +148,12 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
+        return back();
+    }
+    public function updateStatus($id,Request $req){
+        $user = User::find($id);
+        $user->status = $req->status;
+        $user->save();
         return back();
     }
 }

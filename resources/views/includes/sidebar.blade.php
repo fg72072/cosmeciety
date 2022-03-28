@@ -26,156 +26,73 @@
       </li>
       @role('seller')
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#product" aria-expanded="false" aria-controls="product">
+        <a class="nav-link" href="{{url('product')}}">
           <i class="mdi mdi-content-cut menu-icon"></i>
           <span class="menu-title">Products</span>
-          <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="product">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('product')}}">List</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('product/create')}}">Add</a>
-            </li>
-          </ul>
-        </div>
+    
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{url('inventory/create')}}">
           <i class="mdi mdi-content-cut menu-icon"></i>
-          <span class="menu-title">Add Inventory</span>
+          <span class="menu-title">Inventory Section</span>
         </a>
       </li>
       @endrole
       
       @role('super-admin')
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#user" aria-expanded="false" aria-controls="user">
+        <a class="nav-link" href="{{url('user')}}">
           <i class="mdi mdi-content-cut menu-icon"></i>
           <span class="menu-title">Users</span>
-          <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="user">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('user')}}">List</a>
-            </li>
-            {{-- <li class="nav-item">
-              <a class="nav-link" href="{{url('user/create')}}">Add</a>
-            </li> --}}
-          </ul>
-        </div>
       </li>
       @endrole
       @role('super-admin')
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#category" aria-expanded="false" aria-controls="category">
+        <a class="nav-link" href="{{url('category')}}">
           <i class="mdi mdi-content-cut menu-icon"></i>
           <span class="menu-title">Category</span>
-          <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="category">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('category')}}">List</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('category/create')}}">Add</a>
-            </li>
-          </ul>
-        </div>
       </li>
       @endrole
       @role('seller')
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#order" aria-expanded="false" aria-controls="order">
+        <a class="nav-link" href="{{url('order')}}">
           <i class="mdi mdi-content-cut menu-icon"></i>
           <span class="menu-title">Orders</span>
-          <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="order">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('order')}}">List</a>
-            </li>
-          </ul>
-        </div>
+    
       </li>
       @endrole
       @role('super-admin')
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#topic" aria-expanded="false" aria-controls="topic">
+        <a class="nav-link" href="{{url('topic')}}">
           <i class="mdi mdi-content-cut menu-icon"></i>
           <span class="menu-title">Social Forum</span>
-          <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="topic">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('topic')}}">List</a>
-            </li>
-            {{-- <li class="nav-item">
-              <a class="nav-link" href="{{url('topic/create')}}">Add</a>
-            </li> --}}
-          </ul>
-        </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#wall" aria-expanded="false" aria-controls="wall">
+        <a class="nav-link" href="{{url('wall')}}">
           <i class="mdi mdi-content-cut menu-icon"></i>
           <span class="menu-title">Wall</span>
-          <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="wall">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('wall')}}">List</a>
-            </li>
-            {{-- <li class="nav-item">
-              <a class="nav-link" href="{{url('topic/create')}}">Add</a>
-            </li> --}}
-          </ul>
-        </div>
       </li>
       @endrole
       @role('super-admin')
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#contest" aria-expanded="false" aria-controls="contest">
+        <a class="nav-link" href="{{url('contest')}}">
           <i class="mdi mdi-content-cut menu-icon"></i>
           <span class="menu-title">Contest</span>
-          <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="contest">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('contest')}}">List</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('contest/create')}}">Add</a>
-            </li>
-          </ul>
-        </div>
       </li>
       @endrole
       @role('super-admin')
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#transaction" aria-expanded="false" aria-controls="transaction">
+        <a class="nav-link" href="{{url('transaction')}}">
           <i class="mdi mdi-content-cut menu-icon"></i>
           <span class="menu-title">Transaction</span>
-          <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="transaction">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('transaction')}}">List</a>
-            </li>
-            {{-- <li class="nav-item">
-              <a class="nav-link" href="{{url('contest/create')}}">Add</a>
-            </li> --}}
-          </ul>
-        </div>
       </li>
       @endrole
     </ul>

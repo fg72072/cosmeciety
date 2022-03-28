@@ -16,7 +16,9 @@
         <div class="col-lg-12 col-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              {{-- <h4 class="card-title">Hoverable Table</h4> --}}
+              <div class="add-btn-section">
+                <a class="btn btn-primary" href="{{url('category/create')}}">Add Category</a>
+              </div>
               </p>
               <div class="table-responsive">
                 <table class="table table-hover datatable ">

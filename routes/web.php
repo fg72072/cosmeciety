@@ -45,6 +45,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth','verified']], function () 
             // Route::get('/create', 'UserController@create');
             // Route::post('/create', 'UserController@store')->name('user.store');
             Route::post('/delete/{id}', 'UserController@destroy');
+            Route::post('/update-status/{id}', 'UserController@updateStatus'); 
         });
         Route::get('/edit/{id}', 'UserController@edit')->middleware('role:seller|super-admin');
         Route::post('/update/{id}', 'UserController@update')->middleware('role:seller|super-admin'); 

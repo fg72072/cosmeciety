@@ -41,6 +41,8 @@ $("#imageUpload").change(function() {
     fasterPreview(this);
 });
 
-
+$(".update-status").click(function(e){
+    $(this).parent().submit();
+})
 
 $('.datatable').DataTable();
