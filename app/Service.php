@@ -9,4 +9,8 @@ class Service extends Model
 {
     use SoftDeletes;
     //
+    function barber()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

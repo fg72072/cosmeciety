@@ -27,6 +27,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::group(['prefix'=>'customer','namespace' => 'Customer','middleware'=>['auth.jwt']], function () {
         Route::get('barbers', 'ServiceController@barber');
         Route::get('barber/{id}', 'ServiceController@showBarber');
+        Route::get('services/{id}', 'ServiceController@showBarberService');
     });
 
 
