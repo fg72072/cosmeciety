@@ -23,10 +23,16 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('reset', 'AuthController@reset');
     Route::post('otp/send', 'OtpController@send');
     Route::post('otp/verify', 'OtpController@otpVerify');
-    
+
     Route::group(['prefix'=>'customer','namespace' => 'Customer','middleware'=>['auth.jwt']], function () {
         Route::get('barbers', 'ServiceController@barber');
         Route::get('barber/{id}', 'ServiceController@showBarber');
     });
-    
+
+
+    Route::group(['prefix' =>'barber' ,'namespace' => 'Barber','middleware'=>['auth.jwt']], function () {
+        Route::get('service','ServiceController@Index');
+        Route::post('service/add','ServiceController@store');
+    });
 });
+
