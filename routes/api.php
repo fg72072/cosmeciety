@@ -13,13 +13,20 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth.jwt')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::group(['namespace' => 'Api'], function () {
     Route::post('login', 'AuthController@login');
+    Route::post('forme', 'AuthController@forme');
     Route::post('register', 'AuthController@register');
     Route::post('reset', 'AuthController@reset');
     Route::post('otp/send', 'OtpController@send');
     Route::post('otp/verify', 'OtpController@otpVerify');
+    
+    Route::group(['prefix'=>'customer','namespace' => 'Customer','middleware'=>['auth.jwt']], function () {
+        Route::get('barbers', 'ServiceController@barber');
+        Route::get('barber/{id}', 'ServiceController@showBarber');
+    });
+    
 });
