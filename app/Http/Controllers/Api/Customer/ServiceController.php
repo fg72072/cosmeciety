@@ -18,7 +18,7 @@ class ServiceController extends Controller
     {
         $barbers = User::whereHas('roles', function ($q) {
             $q->where('name', 'barber');
-        })->get();
+        })->get()->makeHidden(['email','email_verified_at']);
 
         return response()->json([
             'success' => true,
@@ -29,7 +29,7 @@ class ServiceController extends Controller
     {
         $barber = User::whereHas('roles', function ($q) {
             $q->where('name', 'barber');
-        })->where('id', $id)->first();
+        })->where('id', $id)->first()->makeHidden(['email','email_verified_at']);
 
         if ($barber) {
             return response()->json([
