@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Service;
 use JWTAuth;
 
 class StoreController extends Controller
@@ -26,12 +27,11 @@ class StoreController extends Controller
         $store = User::whereHas('roles', function ($q) {
             $q->where('name', 'seller');
         })->where('id',$id)->first()->makeHidden(['email','email_verified_at']);
-        
-        $store->products = $barber = Product::where('user_id', $id)->get();
-        if ($barber) {
+        $store->products = $product = Product::where('user_id', $id)->get();
+        if ($product) {
             return response()->json([
                 'success' => true,
-                'barber' => $barber,
+                'store' => $store,
             ], 200);
         } else {
             return response()->json([
@@ -41,12 +41,4 @@ class StoreController extends Controller
         }
     }
 
-    public function showBarberService($id)
-    {
-        $services = Service::where('user_id', $id)->get();
-            return response()->json([
-                'success' => true,
-                'services' => $services,
-            ], 200);
-    }
 }
