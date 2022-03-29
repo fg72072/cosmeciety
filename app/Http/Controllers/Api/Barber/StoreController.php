@@ -23,7 +23,11 @@ class StoreController extends Controller
     }
     public function showStore($id)
     {
-        $barber = Product::where('user_id', $id)->get();
+        $store = User::whereHas('roles', function ($q) {
+            $q->where('name', 'seller');
+        })->where('id',$id)->first()->makeHidden(['email','email_verified_at']);
+        
+        $store->products = $barber = Product::where('user_id', $id)->get();
         if ($barber) {
             return response()->json([
                 'success' => true,
