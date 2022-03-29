@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Like;
 use App\Post;
 use JWTAuth;
 
@@ -13,7 +14,7 @@ class PostController extends Controller
 {
     public function index(Request $req)
     {
-        $social_forums = Post::with('postComments.user:id,img,name')->with('user:id,img')->where('status','1')->get();
+        $social_forums = Post::withCount('like')->with('postComments.user:id,img,name')->with('user:id,img')->where('status','1')->get();
         return response()->json([
             'success' => true,
             'social_forums' => $social_forums,
@@ -57,6 +58,36 @@ class PostController extends Controller
             }
             catch(\Exception $e){
                 return response()->json(['success'=>false,'data'=>'something goes wrong'],400);
+        }
+    }
+
+    public function like(Request $req,$id)
+    {
+        $like = Like::where('user_id',JWTAuth::user()->id)->where('id',$id)->first();
+
+        if($like){
+            $like->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Like successfully remove.',
+            ],200);
+        }
+        else{
+            try{
+                $like = new Like;
+                $like->user_id = JWTAuth::user()->id;
+                $like->post_id = $id;
+                $like->like = 1;
+                if($like->save()){
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Like successfully saved.',
+                    ],200);
+                }
+                }
+                catch(\Exception $e){
+                    return response()->json(['success'=>false,'data'=>'something goes wrong'],400);
+            }  
         }
     }
 }

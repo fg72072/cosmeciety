@@ -33,6 +33,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('post', 'PostController@index');
         Route::get('post/{id}', 'PostController@show');
         Route::post('post/create', 'PostController@store');
+        Route::post('post/comment/create/{id}', 'CommentController@storePostComment');
     });
 
 
