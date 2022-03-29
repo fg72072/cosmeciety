@@ -25,6 +25,9 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('otp/verify', 'OtpController@otpVerify');
 
 
+    Route::post('profile/update', 'ProfileController@update')->middleware('auth.jwt');
+    Route::post('profile/upload_media', 'ProfileController@upload_media')->middleware('auth.jwt');
+
     Route::group(['middleware'=>['auth.jwt']], function () {
         Route::post('profile/update', 'ProfileController@update')->middleware('auth.jwt');
         Route::post('profile/upload_media', 'ProfileController@upload_media')->middleware('auth.jwt');
@@ -38,6 +41,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('post/{id}', 'PostController@show');
         Route::post('post/create', 'PostController@store');
     });
+
 
 
     Route::group(['prefix'=>'customer','namespace' => 'Customer','middleware'=>['auth.jwt']], function () {
