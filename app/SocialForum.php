@@ -18,4 +18,9 @@ class SocialForum extends Model
     {
         return $this->hasMany(Comment::class, 'post_id', 'id')->where('type', '0');
     }
+
+    public function topicComments()
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'id')->where('type', '0')->where('status','1');
+    }
 }

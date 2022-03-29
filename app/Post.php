@@ -13,10 +13,15 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
-
+    
     public function comments()
     {
         return $this->hasMany(Comment::class, 'post_id', 'id')->where('type', '1');
+    }
+
+    public function postComments()
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'id')->where('type', '1')->where('status','1');
     }
 
     public function like()

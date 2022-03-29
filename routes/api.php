@@ -24,8 +24,22 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('otp/send', 'OtpController@send');
     Route::post('otp/verify', 'OtpController@otpVerify');
 
+
     Route::post('profile/update', 'ProfileController@update')->middleware('auth.jwt');
     Route::post('profile/upload_media', 'ProfileController@upload_media')->middleware('auth.jwt');
+
+    Route::group(['middleware'=>['auth.jwt']], function () {
+        Route::get('community-forum', 'CommunityController@index');
+        Route::get('community-forum/{id}', 'CommunityController@show');
+        Route::post('community-forum/create', 'CommunityController@store');
+        Route::post('community-forum/comment/create/{id}', 'CommentController@storeTopicComment');
+
+        Route::get('post', 'PostController@index');
+        Route::get('post/{id}', 'PostController@show');
+        Route::post('post/create', 'PostController@store');
+    });
+
+
 
     Route::group(['prefix'=>'customer','namespace' => 'Customer','middleware'=>['auth.jwt']], function () {
         Route::get('barbers', 'ServiceController@barber');

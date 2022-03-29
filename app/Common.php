@@ -11,5 +11,7 @@ class Common extends Model
     {
        return Auth::user()->roles->pluck('name');
     }
+
+
     
 }
