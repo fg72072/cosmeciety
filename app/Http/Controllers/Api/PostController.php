@@ -64,7 +64,6 @@ class PostController extends Controller
     public function like(Request $req,$id)
     {
         $like = Like::where('user_id',JWTAuth::user()->id)->where('id',$id)->first();
-
         if($like){
             $like->delete();
             return response()->json([

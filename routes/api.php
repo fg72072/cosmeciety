@@ -50,7 +50,7 @@ Route::group(['namespace' => 'Api'], function () {
 
 
     Route::group(['prefix' =>'barber' ,'namespace' => 'Barber','middleware'=>['auth.jwt']], function () {
-        Route::get('service','ServiceController@Index');
+        Route::get('service','ServiceController@index');
         Route::get('service/{id}','ServiceController@show');
         Route::post('service/add','ServiceController@store');
     });
