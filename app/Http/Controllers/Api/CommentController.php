@@ -29,4 +29,26 @@ class CommentController extends Controller
                 return response()->json(['success'=>false,'message'=>$e],400);
         }
     }
+
+    public function storePostComment(Request $req,$id)
+    {
+        $validate = Request()->validate([
+            'message' => 'required',
+        ]);
+        try{
+            $parent = 0;
+            if($req->parent){
+                $parent = $req->parent;
+            }
+            if(Comment::store($id,$req->message,$parent,'1')){
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Comment successfully saved.',
+                ],200);
+            }
+            }
+            catch(\Exception $e){
+                return response()->json(['success'=>false,'message'=>$e],400);
+        }
+    }
 }
