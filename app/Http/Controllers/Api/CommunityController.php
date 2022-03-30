@@ -56,7 +56,7 @@ class CommunityController extends Controller
             $topic->user_id = JWTAuth::user()->id;
             $topic->title = $req->title;
             $topic->description = $req->description;
-            $topic->status = $req->status;
+            $topic->status = '1';
             if($topic->save()){
                 return response()->json([
                     'success' => true,
