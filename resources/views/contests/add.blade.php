@@ -31,6 +31,10 @@
                       <span class="text-danger">{{$message}}</span>
                     </div>
                     @enderror
+                    <div class="mt-3">
+                    <span >Recommended size 60 x 55</span>
+                    </div>
+
                   </div>
                 <div class="form-group">
                   <label for="name">Title</label>

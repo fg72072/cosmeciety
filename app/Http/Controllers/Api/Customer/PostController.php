@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers\Api\Customer;
 
+use JWTAuth;
+use App\Like;
+use App\Post;
+use App\Media;
 use App\Comment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Container\CommonContainer;
 use App\Http\Controllers\Controller;
-use App\Like;
-use App\Post;
-use JWTAuth;
 
 
 class PostController extends Controller
 {
+    protected $media;
+
+    public function __construct(CommonContainer $media)
+    {
+        return $this->media = $media;
+    }
+    
     public function index(Request $req)
     {
         $posts = Post::withCount('like')->with('postcomments.user:id,img,name')->where('status','1')->get();
@@ -43,17 +52,35 @@ class PostController extends Controller
         $validate = Request()->validate([
             'title' => 'required',
             'description' => 'required|string',
+            'img' => 'required'
         ]);
         try{
             $post = new Post;
             $post->user_id = JWTAuth::user()->id;
             $post->title = $req->title;
             $post->description = $req->description;
-            $post->status = $req->status;
+            $post->status = '1';
             if($post->save()){
+                for ($i = 0; $i < count($req->file('img')); $i++) {
+                    # code...
+                    if ($req->hasFile('img')) {
+                        $image = $req->file('img')[$i];
+                        $name  = $this->media->getFileName($image);
+                        $path  = $this->media->getProfilePicPath('post');
+                        $image->move($path, $name);
+                        $uploadmedia = new Media;
+                        $uploadmedia->user_id = JWTAuth::user()->id;
+                        $uploadmedia->media_against = $post->id;
+                        $uploadmedia->file = $name;
+                        $uploadmedia->type = '2';
+                        if($uploadmedia->save()){
+
+                        }
+                    }
+                }
                 return response()->json([
                     'success' => true,
-                    'message' => 'Topic successfully saved.',
+                    'message' => 'Post successfully saved.',
                 ],200);
             }
             }
