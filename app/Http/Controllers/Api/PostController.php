@@ -86,7 +86,7 @@ class PostController extends Controller
                 }
                 catch(\Exception $e){
                     return response()->json(['success'=>false,'data'=>'something goes wrong'],400);
-            }  
+            }
         }
     }
 }

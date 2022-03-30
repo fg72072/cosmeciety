@@ -38,6 +38,10 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('post/{id}', 'PostController@show');
         Route::post('post/create', 'PostController@store');
         Route::post('post/comment/create/{id}', 'CommentController@storePostComment');
+        Route::get('contest','ContestController@getContest');
+        Route::post('contest/add-participant','ContestController@addParticipate');
+        Route::get('contest/participant/{id}','ContestController@getParticipateViaContest');
+        Route::post('participant/vote','ContestController@vote');
     });
 
 
@@ -55,6 +59,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('service/add','ServiceController@store');
         Route::get('store','StoreController@store');
         Route::get('store/{id}','StoreController@showStore');
+
     });
 });
 
