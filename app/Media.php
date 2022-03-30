@@ -11,7 +11,7 @@ class Media extends Model
     // 1 = saloon
     // 2 = social wall
     // 3 = contest
-    // 4 = participant
+    //4  = Participant
 
     use SoftDeletes;
     public $table = 'medias';
