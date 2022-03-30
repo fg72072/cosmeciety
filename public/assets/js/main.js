@@ -46,3 +46,53 @@ $(".update-status").click(function(e){
 })
 
 $('.datatable').DataTable();
+
+$(".view-order").click(function(e){
+    e.preventDefault();
+    $.ajax({
+        url: $(this).attr('href'),
+        method: 'get',
+        success: function(data) {
+            $(".view-order-data").html(data);
+        }
+    });
+});
+
+var disablepast = new Date();
+var disbaleddate = new Date(disablepast.getFullYear(), disablepast.getMonth(), disablepast.getDate());
+$('#contest_start_date').datetimepicker({
+lang:'ch',
+timepicker:false,
+format:'m/d/Y',
+scrollInput : false,
+minDate:disbaleddate
+});
+$('#contest_start_date').change(function(e){
+    allDates()
+});
+
+function allDates()
+{
+    $('#contest_end_date').datetimepicker({
+        lang:'ch',
+        timepicker:false,
+        format:'m/d/Y',
+        scrollInput : false,
+        minDate:addDays($("#contest_start_date").val(),1)
+    }); 
+    $('#post_live_date').datetimepicker({
+        lang:'ch',
+        timepicker:false,
+        format:'m/d/Y',
+        scrollInput : false,
+        minDate:addDays($("#contest_start_date").val(),1)
+    }); 
+}
+allDates()
+
+
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+}

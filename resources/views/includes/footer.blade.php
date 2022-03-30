@@ -3,6 +3,7 @@
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="{{asset('assets/vendors/chart.js/Chart.min.js')}}"></script>
+    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
     <script src="{{asset('assets/vendors/flot/jquery.flot.js')}}"></script>
     <script src="{{asset('assets/vendors/flot/jquery.flot.resize.js')}}"></script>
@@ -22,6 +23,8 @@
     <!-- Custom js for this page -->
     <script src="{{asset('assets/js/dashboard.js')}}"></script>
     <script src="{{asset('assets/js/datatable.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.datetimepicker.js')}}"></script>
+
     <script src="{{asset('assets/js/main.js')}}"></script>
     <!-- End custom js for this page -->
   </body>

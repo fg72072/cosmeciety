@@ -49,6 +49,14 @@
                     </div>
                     @enderror
                 </div>
+
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <select class="form-control" name="type" id="type" style="width: 100%;">
+                        <option value="in" selected>Addition</option>
+                        <option value="out">Subtraction</option>
+                      </select>
+                </div>
                 
                 {{-- <div class="form-group d-flex justify-content-between">
                     <label >Current Stock : <span class="current-stock">54</span></label>

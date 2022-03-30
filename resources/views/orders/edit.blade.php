@@ -1,28 +1,27 @@
-@extends('layouts.app')
-@section('content')
-    <div class="main-panel">
-        <div class="content-wrapper">
-            <div class="page-header">
-                <h3 class="page-title">Add Order</h3>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"> Add Order </li>
-                    </ol>
-                </nav>
-            </div>
-            <div class="row ">
+
+      <form class="forms-sample" action="{{ url('order/update/'.$order->id) }}" method="POST"
+                                enctype="multipart/form-data">
+     <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Order : #{{$order->id}}</h5>
+        
+        <h5 class="modal-title" id="exampleModalLabel">SubTotal : ${{$order->subtotal}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tax : ${{$order->tax}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">GrandTotal : ${{$order->grand_total}}</h5>
+        <i class="mdi mdi-close menu-icon pointer" data-bs-dismiss="modal" aria-label="Close"></i>
+      </div>
+      
+      <div class="modal-body ">
+      <div class="row ">
                 <div class="col-12 grid-margin ">
                     <div class="card">
                         <div class="card-body">
-                            <form class="forms-sample" action="{{ url('order/update/'.$order->id) }}" method="POST"
-                                enctype="multipart/form-data">
+                           
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="first_name">First Name</label>
-                                            <input type="text" class="form-control" value="{{$order->first_name}}" name="first_name" id="first_name"
+                                            <input type="text" class="form-control" readonly value="{{$order->first_name}}" name="first_name" id="first_name"
                                                 placeholder="First Name" />
                                             @error('first_name')
                                                 <div class="mt-1">
@@ -32,7 +31,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="last_name">Last Name</label>
-                                            <input type="text" class="form-control" value="{{$order->last_name}}" name="last_name" id="last_name"
+                                            <input type="text" class="form-control" readonly value="{{$order->last_name}}" name="last_name" id="last_name"
                                                 placeholder="Last Name" />
                                             @error('last_name')
                                                 <div class="mt-1">
@@ -42,7 +41,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="mobile">Mobile</label>
-                                            <input type="mobile" class="form-control" value="{{$order->mobile}}" name="mobile" id="mobile"
+                                            <input type="mobile" class="form-control" readonly value="{{$order->mobile}}" name="mobile" id="mobile"
                                                 placeholder="Mobile" />
                                             @error('mobile')
                                                 <div class="mt-1">
@@ -52,7 +51,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="postal_code">Postal Code</label>
-                                            <input type="postal_code" class="form-control" value="{{$order->postal_code}}" name="postal_code" id="postal_code"
+                                            <input type="postal_code" class="form-control" readonly value="{{$order->postal_code}}" name="postal_code" id="postal_code"
                                                 placeholder="Postal Code" />
                                             @error('postal_code')
                                                 <div class="mt-1">
@@ -60,24 +59,17 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                        <button type="submit" class="btn btn-primary mr-2"> Update </button>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="country">Country</label>
-                                            <select class="js-example-basic-single" name="country" id="country" style="width: 100%;">
-                                                @foreach ($countries as $country)
-                                                <option value="{{$country->id}}" @if($order->country_id == $country->id) selected @endif>{{$country->name}}</option>
-                                                @endforeach
-                                            </select>
+                                            <input type="postal_code" class="form-control" readonly value="{{$order->country->name}}" name="postal_code" id="postal_code"
+                                                placeholder="Postal Code" />
                                         </div>
                                         <div class="form-group">
                                             <label for="city">City</label>
-                                            <select class="js-example-basic-single" name="city" id="city" style="width: 100%;">
-                                                @foreach ($cities as $city)
-                                                <option value="{{$city->id}}" @if($order->city_id == $city->id) selected @endif>{{$city->name}}</option>
-                                                @endforeach
-                                            </select>
+                                            <input type="postal_code" class="form-control" readonly value="{{$order->city->name}}" name="postal_code" id="postal_code"
+                                                placeholder="Postal Code" />
                                         </div>
                                         <div class="form-group">
                                             <label for="status">Status</label>
@@ -89,7 +81,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -136,6 +127,10 @@
                   </div>
                 </div>
               </div>
-        </div>
-    </div>
-@endsection
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+

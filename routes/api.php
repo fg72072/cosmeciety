@@ -33,11 +33,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('community-forum/{id}', 'CommunityController@show');
         Route::post('community-forum/create', 'CommunityController@store');
         Route::post('community-forum/comment/create/{id}', 'CommentController@storeTopicComment');
-
-        Route::get('post', 'PostController@index');
-        Route::get('post/{id}', 'PostController@show');
-        Route::post('post/create', 'PostController@store');
-        Route::post('post/comment/create/{id}', 'CommentController@storePostComment');
+        Route::post('customer/post/comment/create/{id}', 'CommentController@storePostComment');
     });
 
 
@@ -46,6 +42,11 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('barbers', 'ServiceController@barber');
         Route::get('barber/{id}', 'ServiceController@showBarber');
         Route::get('services/{id}', 'ServiceController@showBarberService');
+
+        Route::get('post', 'PostController@index');
+        Route::get('post/{id}', 'PostController@show');
+        Route::post('post/create', 'PostController@store');
+        Route::post('post/like/{id}', 'PostController@like');
     });
 
 

@@ -17,6 +17,11 @@ class Comment extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    // public function parentComments()
+    // {
+    //     return $this->hasMany(Comment::class, 'parent', 'id')->where('status','1');
+    // }
+
     public static function store($post_id,$message,$parent,$type){
         $comment = new Comment;
         $comment->post_id = $post_id;
