@@ -27,7 +27,8 @@ class ProductController extends Controller
         $products = $products->get();
         foreach($products as $product){
             $product->stock = Product::stock($product->id);
-        }         
+            $product->purchase_price = Product::getPurchasePrice($product->id);
+        }   
         return view('product.list',compact('products'));
     }
 

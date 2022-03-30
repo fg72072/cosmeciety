@@ -56,13 +56,13 @@
                       @if ($order->deliveryStatus->title == "Pending" || $order->deliveryStatus->title == "Cancel")
                       <label class="badge badge-danger">{{$order->deliveryStatus->title}}</label>
                       @elseif ($order->deliveryStatus->title == "Confirm" || $order->deliveryStatus->title == "Delivered")
-                      <label class="badge badge-danger">{{$order->deliveryStatus->title}}</label>
+                      <label class="badge badge-success">{{$order->deliveryStatus->title}}</label>
                       @endif
                     </td>
                     <td>
                       <div class="btn-flex">
-                          <a href="{{url('order/edit/'.$order->id)}}" class="btn text-white btn-success btn-icon-text">
-                              <i class="mdi mdi-pencil-box-outline btn-icon-prepend"></i> Edit </a>
+                          <a href="{{url('order/edit/'.$order->id)}}" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn view-order text-white btn-success btn-icon-text">
+                              <i class="mdi mdi-eye btn-icon-prepend"></i> View </a>
                           {{-- <form action="{{url('order/delete/'.$order->id)}}" method="post" class="delete-form">
                           @csrf
                               <button type="submit" class="btn btn-danger btn-icon-text">
@@ -81,4 +81,14 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content view-order-data">
+    
+    </div>
+
+    </div>
+  </div>
+</div>
 @endsection

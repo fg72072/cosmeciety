@@ -24,4 +24,14 @@ class Order extends Model
     {
         return $this->belongsTo(DeliveryStatus::class, 'status', 'id');
     }
+
+    function city()
+    {
+        return $this->belongsTo(City::class, 'city_id', 'id');
+    }
+
+    function country()
+    {
+        return $this->belongsTo(Country::class, 'country_id', 'id');
+    }
 }

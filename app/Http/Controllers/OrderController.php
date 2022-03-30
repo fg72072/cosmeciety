@@ -16,7 +16,7 @@ class OrderController extends Controller
         //     $query->where('user_id', '=', Auth::user()->id);
         // })->get();
 
-        $orders = Order::with('user','deliveryStatus')->whereHas('orderItems.product', function ($query) {
+        $orders = Order::with('user','country:id,name','city:id,name','deliveryStatus')->whereHas('orderItems.product', function ($query) {
             $query->where('user_id', '=', Auth::user()->id);
         })->get();
 
@@ -42,12 +42,12 @@ class OrderController extends Controller
         $order = Order::whereHas('orderItems.product', function ($query) {
             $query->where('user_id', '=', Auth::user()->id);
         })->where('id',$id)->first();
-        $order->first_name = $req->first_name;
-        $order->last_name = $req->last_name;
-        $order->mobile = $req->mobile;
-        $order->postal_code = $req->postal_code;
-        $order->country_id = $req->country;
-        $order->city_id = $req->city;
+        // $order->first_name = $req->first_name;
+        // $order->last_name = $req->last_name;
+        // $order->mobile = $req->mobile;
+        // $order->postal_code = $req->postal_code;
+        // $order->country_id = $req->country;
+        // $order->city_id = $req->city;
         $order->status = $req->status;
         $order->save();
         return back();

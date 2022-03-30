@@ -17,7 +17,7 @@ class InventoryController extends Controller
 
     public function store(Request $req)
     {
-        Inventory::addInventory($req,'in');
+        Inventory::addInventory($req,$req->type);
         return back();
     }
 }
