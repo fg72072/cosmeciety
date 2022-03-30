@@ -33,6 +33,12 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('community-forum/{id}', 'CommunityController@show');
         Route::post('community-forum/create', 'CommunityController@store');
         Route::post('community-forum/comment/create/{id}', 'CommentController@storeTopicComment');
+        Route::post('post/comment/create/{id}', 'CommentController@storePostComment');
+
+        Route::get('contest','ContestController@getContest');
+        Route::post('contest/add-participant','ContestController@addParticipate');
+        Route::get('contest/participant/{id}','ContestController@getParticipateViaContest');
+        Route::post('participant/vote','ContestController@vote');
         Route::post('customer/post/comment/create/{id}', 'CommentController@storePostComment');
     });
 
@@ -56,6 +62,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('service/add','ServiceController@store');
         Route::get('store','StoreController@store');
         Route::get('store/{id}','StoreController@showStore');
+
         Route::get('product','StoreController@product');
     });
 });

@@ -9,4 +9,6 @@ class Contest extends Model
 {
     use SoftDeletes;
     //
+
+
 }
