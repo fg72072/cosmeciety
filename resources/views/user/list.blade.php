@@ -66,8 +66,8 @@
                     </td>
                     <td>
                       <div class="btn-flex">
-                          <a href="{{url('user/edit/'.$user->id)}}" class="btn text-white btn-success btn-icon-text">
-                              <i class="mdi mdi-pencil-box-outline btn-icon-prepend"></i> Edit </a>
+                          <!-- <a href="{{url('user/edit/'.$user->id)}}" class="btn text-white btn-success btn-icon-text">
+                              <i class="mdi mdi-pencil-box-outline btn-icon-prepend"></i> Edit </a> -->
                           <form action="{{url('user/delete/'.$user->id)}}" method="post" class="delete-form">
                           @csrf
                               <button type="submit" class="btn btn-danger btn-icon-text">

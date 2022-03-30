@@ -33,15 +33,13 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('community-forum/{id}', 'CommunityController@show');
         Route::post('community-forum/create', 'CommunityController@store');
         Route::post('community-forum/comment/create/{id}', 'CommentController@storeTopicComment');
-
-        Route::get('post', 'PostController@index');
-        Route::get('post/{id}', 'PostController@show');
-        Route::post('post/create', 'PostController@store');
         Route::post('post/comment/create/{id}', 'CommentController@storePostComment');
+
         Route::get('contest','ContestController@getContest');
         Route::post('contest/add-participant','ContestController@addParticipate');
         Route::get('contest/participant/{id}','ContestController@getParticipateViaContest');
         Route::post('participant/vote','ContestController@vote');
+        Route::post('customer/post/comment/create/{id}', 'CommentController@storePostComment');
     });
 
 
@@ -50,6 +48,11 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('barbers', 'ServiceController@barber');
         Route::get('barber/{id}', 'ServiceController@showBarber');
         Route::get('services/{id}', 'ServiceController@showBarberService');
+
+        Route::get('post', 'PostController@index');
+        Route::get('post/{id}', 'PostController@show');
+        Route::post('post/create', 'PostController@store');
+        Route::post('post/like/{id}', 'PostController@like');
     });
 
 
@@ -60,6 +63,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('store','StoreController@store');
         Route::get('store/{id}','StoreController@showStore');
 
+        Route::get('product','StoreController@product');
     });
 });
 

@@ -31,6 +31,14 @@ class Product extends Model
                 $total-= $stock->qty;
             }
         }
+        if($total < 0){
+            $total = 0;
+        }
         return $total;
+    }
+
+    public static function getPurchasePrice($id){
+        $product_purchase_price = Inventory::where('stock_type','in')->where('p_id',$id)->orderBy('id','Desc')->pluck('purchase_price')->first();
+        return $product_purchase_price;
     }
 }

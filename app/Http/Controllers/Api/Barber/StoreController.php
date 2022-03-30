@@ -40,5 +40,13 @@ class StoreController extends Controller
             ], 404);
         }
     }
+    public function product()
+    {
+        $products = Product::with('seller:id,name')->where('status','1')->get();
+        return response()->json([
+            'success' => true,
+            'products' => $products,
+        ], 200);
+    }
 
 }

@@ -30,6 +30,7 @@
                       <th>Short Intro</th>
                       <th>Seller</th>
                       <th>Price</th>
+                      <th>Purchase Price</th>
                       <th>Stock</th>
                       <th>Status</th>
                       <th>Action</th>
@@ -51,6 +52,7 @@
                       <td>{{$product->description}}</td>
                       <td>{{$product->seller->name}}</td>
                       <td>${{$product->price}}</td>
+                      <td>${{$product->purchase_price}}</td>
                       <td>{{$product->stock}}</td>
                       <td>
                         @if ($product->status == 1)

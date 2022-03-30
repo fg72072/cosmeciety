@@ -21076,6 +21076,9 @@ cursor: pointer;
 	justify-content: end;
 	margin-bottom: 2rem;
 }
+.pointer{
+	cursor: pointer;
+}
 @media (max-width: 600px) {
 	.custom-form-width{
 		width: 90%;

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Customer;
 
+use App\Comment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,20 +15,20 @@ class PostController extends Controller
 {
     public function index(Request $req)
     {
-        $social_forums = Post::withCount('like')->with('postComments.user:id,img,name')->with('user:id,img')->where('status','1')->get();
+        $posts = Post::withCount('like')->with('postcomments.user:id,img,name')->where('status','1')->get();
         return response()->json([
             'success' => true,
-            'social_forums' => $social_forums,
+            'posts' => $posts,
         ], 200);
     }
 
     public function show($id)
     {
-        $social_forum = Post::with('user:id,name,img','topicComments.user:id,img,name')->where('status','1')->where('id',$id)->first();
-        if ($social_forum) {
+        $post = Post::withCount('like')->with('postcomments.user:id,img,name')->where('status','1')->where('id',$id)->first();
+        if ($post) {
             return response()->json([
                 'success' => true,
-                'social_forum' => $social_forum,
+                'post' => $post,
             ], 200);
         } else {
             return response()->json([
@@ -44,12 +45,12 @@ class PostController extends Controller
             'description' => 'required|string',
         ]);
         try{
-            $topic = new Post;
-            $topic->user_id = JWTAuth::user()->id;
-            $topic->title = $req->title;
-            $topic->description = $req->description;
-            $topic->status = $req->status;
-            if($topic->save()){
+            $post = new Post;
+            $post->user_id = JWTAuth::user()->id;
+            $post->title = $req->title;
+            $post->description = $req->description;
+            $post->status = $req->status;
+            if($post->save()){
                 return response()->json([
                     'success' => true,
                     'message' => 'Topic successfully saved.',
@@ -63,7 +64,7 @@ class PostController extends Controller
 
     public function like(Request $req,$id)
     {
-        $like = Like::where('user_id',JWTAuth::user()->id)->where('id',$id)->first();
+        $like = Like::where('user_id',JWTAuth::user()->id)->where('post_id',$id)->first();
         if($like){
             $like->delete();
             return response()->json([
