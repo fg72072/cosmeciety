@@ -19,9 +19,9 @@ class Post extends Model
         return $this->hasMany(Comment::class, 'post_id', 'id')->where('type', '1');
     }
 
-    public function postComments()
+    public function postcomments()
     {
-        return $this->hasMany(Comment::class, 'post_id', 'id')->where('type', '1')->where('status','1');
+        return $this->hasMany(Comment::class, 'post_id', 'id')->where('type', '1')->where('status','1')->where('parent','0');
     }
 
     public function like()

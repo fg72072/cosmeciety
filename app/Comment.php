@@ -12,16 +12,15 @@ class Comment extends Model
     // 0 = topic
     // 1 = post
     // 2 = contest
+    protected $appends = ['childs'];
+
     function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
-
-    // public function parentComments()
-    // {
-    //     return $this->hasMany(Comment::class, 'parent', 'id')->where('status','1');
-    // }
-
+    public function getChildsAttribute(){
+        return $this->hasMany(Comment::class, 'parent', 'id')->where('status','1')->where('type','1')->with('user:id,name,img')->get();
+    }
     public static function store($post_id,$message,$parent,$type){
         $comment = new Comment;
         $comment->post_id = $post_id;

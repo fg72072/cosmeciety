@@ -16,7 +16,7 @@ class CommunityController extends Controller
         $social_forums = SocialForum::with('user:id,img')
         ->where('status','1');
         if($req->type == 'trending'){
-            $social_forums = $social_forums->withCount('topicComments')->orderBy('topic_comments_count','Desc');
+            $social_forums = $social_forums->withCount('topiccomments')->orderBy('topic_comments_count','Desc');
         }
         else{
             $social_forums = $social_forums->orderBy('id','Desc');
@@ -30,7 +30,8 @@ class CommunityController extends Controller
 
     public function show($id)
     {
-        $social_forum = SocialForum::with('user:id,name,img','topicComments.user:id,img,name')->where('status','1')->where('id',$id)->first();
+        $social_forum = SocialForum::with('user:id,name,img','topiccomments.user:id,img,name')
+        ->where('status','1')->where('id',$id)->first();
         if ($social_forum) {
             return response()->json([
                 'success' => true,
