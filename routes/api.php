@@ -56,6 +56,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('service/add','ServiceController@store');
         Route::get('store','StoreController@store');
         Route::get('store/{id}','StoreController@showStore');
+        Route::get('product','StoreController@product');
     });
 });
 

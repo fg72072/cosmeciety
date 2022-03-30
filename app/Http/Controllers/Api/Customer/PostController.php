@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Customer;
 
+use App\Comment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,19 +15,7 @@ class PostController extends Controller
 {
     public function index(Request $req)
     {
-        $posts = Post::withCount('like')->with('postComments.user:id,img,name')->with('user:id,img')->where('status','1')->get();
-
-
-        \Illuminate\Support\Collection::macro('recursive', function () {
-            return $this->map(function ($value) {
-                if (is_array($value) || is_object($value)) {
-                    return collect($value)->recursive();
-                }
-        
-                return $value;
-            });
-        });
-        
+        $posts = Post::withCount('like')->with('postcomments.user:id,img,name')->where('status','1')->get();
         return response()->json([
             'success' => true,
             'posts' => $posts,
@@ -35,7 +24,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = Post::withCount('like')->with('user:id,name,img','postComments.user:id,img,name')->where('status','1')->where('id',$id)->first();
+        $post = Post::withCount('like')->with('postcomments.user:id,img,name')->where('status','1')->where('id',$id)->first();
         if ($post) {
             return response()->json([
                 'success' => true,
@@ -56,12 +45,12 @@ class PostController extends Controller
             'description' => 'required|string',
         ]);
         try{
-            $topic = new Post;
-            $topic->user_id = JWTAuth::user()->id;
-            $topic->title = $req->title;
-            $topic->description = $req->description;
-            $topic->status = $req->status;
-            if($topic->save()){
+            $post = new Post;
+            $post->user_id = JWTAuth::user()->id;
+            $post->title = $req->title;
+            $post->description = $req->description;
+            $post->status = $req->status;
+            if($post->save()){
                 return response()->json([
                     'success' => true,
                     'message' => 'Topic successfully saved.',
