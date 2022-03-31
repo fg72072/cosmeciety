@@ -1,0 +1,23 @@
+# login api for development
+POST http://localhost/cosmeciety/api/forme
+Accept:application/json
+Content-Type: application/json
+
+{
+    "email": "yahya.pluton@gmail.com",
+    "password": "12345678"
+}
+
+### register
+POST http://localhost/cosmeciety/api/register
+Accept:application/json
+Content-Type: application/json
+
+{
+    "name": "Fazal",
+    "phone": "03497477599",
+    "email": "fazal@gmail.com",
+    "password": "12345678",
+    "password_confirmation": "12345678",
+    "role": "barber",
+}

@@ -66,28 +66,20 @@
                 <button type="submit" class="btn btn-primary mr-2"> Publish </button>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="content_start_date">Contest Start Date</label>
-                    <input type="text" class="form-control" id="contest_start_date" name="contest_start_date" value="{{old('contest_start_date')}}" id="content_start_date" placeholder="Contest Start Date" />
-                    @error('contest_start_date')
-                    <div class="mt-1">
-                      <span class="text-danger">{{$message}}</span>
-                    </div>
-                    @enderror
-                  </div>
-                  <div class="form-group">
-                    <label for="content_end_date">Contest End Date</label>
-                    <input type="text" class="form-control" id="contest_end_date" name="contest_end_date" value="{{old('contest_end_date')}}" id="content_end_date" placeholder="Contest End Date" />
-                    @error('contest_end_date')
-                    <div class="mt-1">
-                      <span class="text-danger">{{$message}}</span>
-                    </div>
-                    @enderror
-                  </div>
+              
                   <div class="form-group">
                     <label for="acceptance_date">Acceptance Date</label>
                     <input type="text" class="form-control" name="acceptance_date" value="{{old('acceptance_date')}}" id="acceptance_date" placeholder="Acceptance Date" />
                     @error('acceptance_date')
+                    <div class="mt-1">
+                      <span class="text-danger">{{$message}}</span>
+                    </div>
+                    @enderror
+                  </div>
+                  <div class="form-group">
+                    <label for="content_start_date">Contest Start Date</label>
+                    <input type="text" class="form-control" id="contest_start_date" name="contest_start_date" value="{{old('contest_start_date')}}" id="content_start_date" placeholder="Contest Start Date" />
+                    @error('contest_start_date')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
                     </div>
@@ -102,6 +94,16 @@
                     </div>
                     @enderror
                   </div>
+                  <div class="form-group">
+                    <label for="content_end_date">Contest End Date</label>
+                    <input type="text" class="form-control" id="contest_end_date" name="contest_end_date" value="{{old('contest_end_date')}}" id="content_end_date" placeholder="Contest End Date" />
+                    @error('contest_end_date')
+                    <div class="mt-1">
+                      <span class="text-danger">{{$message}}</span>
+                    </div>
+                    @enderror
+                  </div>
+                
                   <div class="form-group">
                     <label for="announce_date">Announce Date</label>
                     <input type="text" class="form-control" name="announce_date" value="{{old('announce_date')}}" id="announce_date" placeholder="Announce Date" />

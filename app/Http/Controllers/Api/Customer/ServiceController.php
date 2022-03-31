@@ -27,7 +27,7 @@ class ServiceController extends Controller
     }
     public function showBarber($id)
     {
-        $barber = User::whereHas('roles', function ($q) {
+        $barber = User::with('workingdays.day')->whereHas('roles', function ($q) {
             $q->where('name', 'barber');
         })->where('id', $id)->first()->makeHidden(['email','email_verified_at']);
 

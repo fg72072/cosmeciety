@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Otp as AppOtp;
+use App\WorkingDay;
 
 class AuthController extends Controller
 {
@@ -131,6 +132,13 @@ class AuthController extends Controller
             if($user->save()){
                 if($req->role == 'barber'){
                     $user->assignRole('barber');
+                    for($i = 1;$i < 8;$i++){
+                        $working_day = new WorkingDay;
+                        $working_day->user_id = $user->id;
+                        $working_day->day_id = $i;
+                        $working_day->status = '0';
+                        $working_day->save();
+                    }
                 }
                 else{
                     $user->assignRole('user');
