@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Comment;
 use JWTAuth;
 use App\Service;
 use Illuminate\View\View;
@@ -16,6 +17,7 @@ use Exception;
 use Hamcrest\Type\IsNumeric;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use Tymon\JWTAuth\Facades\JWTAuth as FacadesJWTAuth;
 
 class ContestController extends Controller
 {
@@ -41,7 +43,6 @@ class ContestController extends Controller
             } elseif ($request->type == 'my_contest') {
                 # code...
                 $contests = $contests->select('contests.*')->join('participants', 'participants.contest_id', '=', 'contests.id')->where('participants.user_id', $user->id);
-
             } elseif ($request->type == 'active') {
                 # code...
                 $contests = $contests->where('status', 1);
@@ -64,15 +65,16 @@ class ContestController extends Controller
     {
         try {
             //code...
-            $data =  Participant::withCount('vote')->with('user','media')->where('contest_id', $id)->get();
+            $data['contest'] =  Contest::where('id', $id)->first();
+            $data['contest']->participants =  Participant::withCount('vote')->with('user', 'media')->where('contest_id', $id)->get();
 
             return  response()->json([
-                'success' => false,
+                'success' => true,
                 'data' => $data,
             ]);
         } catch (Exception $e) {
             //throw $th;
-            return response()->json(['success' => false, 'message' => 'Something Went Wrong'], 400);
+            return response()->json(['success' => false, 'message' => $e], 400);
         }
     }
     public function addParticipate(Request $request)
@@ -121,31 +123,80 @@ class ContestController extends Controller
     public function vote(Request $request)
     {
         $data = JWTAuth::user();
-        $vote=Vote::where('user_id', $data->id)->where('participate_id',$request->participate_id)->first();
-        if($vote){
+        $vote = Vote::where('user_id', $data->id)->where('participate_id', $request->participate_id)->first();
+        if ($vote) {
             $vote->delete();
             return response()->json([
                 'success' => true,
                 'message' => 'Vote successfully remove.',
-            ],200);
-        }
-        else{
-            try{
+            ], 200);
+        } else {
+            try {
                 $vote = new Vote;
                 $vote->user_id = $data->id;
                 $vote->participate_id = $request->participate_id;
                 $vote->vote = 1;
-                if($vote->save()){
+                if ($vote->save()) {
                     return response()->json([
                         'success' => true,
                         'message' => 'Vote successfully saved.',
-                    ],200);
+                    ], 200);
                 }
-                }
-                catch(\Exception $e){
-                    return response()->json(['success'=>false,'data'=>'something goes wrong'],400);
+            } catch (\Exception $e) {
+                return response()->json(['success' => false, 'data' => 'something goes wrong'], 400);
             }
         }
+    }
+    public function getParticipateById($id = null)
+    {
+        try {
+            //code...
+            $data =  Participant::withCount('vote')->with('user', 'media', 'feedbacks.user:id,name,img','contest')->where('id', $id)->get()->makeHidden(['email', 'email_verified_at']);
 
+            return  response()->json([
+                'success' => true,
+                'data' => $data,
+            ]);
+        } catch (Exception $e) {
+            //throw $th;
+            return response()->json(['success' => false, 'message' => $e], 400);
+        }
+    }
+
+    public function participateAddFeedback(Request $request)
+    {
+        $user = JWTAuth::user();
+
+        try {
+            //code...
+            if(isset($request->participant_id))
+            {
+               $check = Comment::store($request->participant_id,$request->message,0,2);
+
+               if($check)
+               {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Feedback saved successfully.',
+                ], 200);
+               }
+            }
+
+        } catch (Exception $e) {
+            //throw $th;
+            return response()->json(['success' => false, 'message' => 'Something Went Wrong'], 400);
+        }
+    }
+    public function getContestWinner(Request $request)
+    {
+        $user = JWTAuth::user();
+
+        try {
+            $contests = Contest::orderBy('contests.id', 'Desc');
+
+        } catch (Exception $e) {
+            //throw $th;
+            return response()->json(['success' => false, 'message' => 'Something Went Wrong'], 400);
+        }
     }
 }
