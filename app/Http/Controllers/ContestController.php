@@ -29,15 +29,15 @@ class ContestController extends Controller
     public function store(Request $req)
     {
         $validate = Request()->validate([
-            'banner' => 'required',
+            'banner' => 'required|dimensions:max_width=60,max_height=55',
             'title' => 'required',
             'description' => 'required|string',
             'entry_fee' => 'required|numeric',
-            'contest_start_date' => 'required',
-            'contest_end_date' => 'required',
-            'acceptance_date' => 'required',
-            'post_live_date' => 'required',
-            'announce_date' => 'required',
+            'entries_acceptance_date' => 'required',
+            'entries_close_date' => 'required',
+            'contest_live_date' => 'required',
+            'contest_close_date' => 'required',
+            'result_announce_date' => 'required',
         ]);
         $contest = new Contest;
         if ($req->hasFile('banner')) {
@@ -51,11 +51,11 @@ class ContestController extends Controller
         $contest->title = $req->title;
         $contest->description = $req->description;
         $contest->entry_fee = $req->entry_fee;
-        $contest->contest_start_date = $req->contest_start_date;
-        $contest->contest_end_date = $req->contest_end_date;
-        $contest->acceptance_date = $req->acceptance_date;
-        $contest->post_live_date = $req->post_live_date;
-        $contest->announce_date = $req->announce_date;
+        $contest->entries_acceptance_date = $req->entries_acceptance_date;
+        $contest->entries_close_date = $req->entries_close_date;
+        $contest->contest_live_date = $req->contest_live_date;
+        $contest->contest_close_date = $req->contest_close_date;
+        $contest->result_announce_date = $req->result_announce_date;
         $contest->status = $req->status;
         $contest->save();
         return back();
@@ -73,11 +73,11 @@ class ContestController extends Controller
             'title' => 'required',
             'description' => 'required|string',
             'entry_fee' => 'required|numeric',
-            'contest_start_date' => 'required',
-            'contest_end_date' => 'required',
-            'acceptance_date' => 'required',
-            'post_live_date' => 'required',
-            'announce_date' => 'required',
+            'entries_acceptance_date' => 'required',
+            'entries_close_date' => 'required',
+            'contest_live_date' => 'required',
+            'contest_close_date' => 'required',
+            'result_announce_date' => 'required',
         ]);
         $contest = Contest::find($id);
         if ($req->hasFile('banner')) {
@@ -91,11 +91,11 @@ class ContestController extends Controller
         $contest->title = $req->title;
         $contest->description = $req->description;
         $contest->entry_fee = $req->entry_fee;
-        $contest->contest_start_date = $req->contest_start_date;
-        $contest->contest_end_date = $req->contest_end_date;
-        $contest->acceptance_date = $req->acceptance_date;
-        $contest->post_live_date = $req->post_live_date;
-        $contest->announce_date = $req->announce_date;
+        $contest->entries_acceptance_date = $req->entries_acceptance_date;
+        $contest->entries_close_date = $req->entries_close_date;
+        $contest->contest_live_date = $req->contest_live_date;
+        $contest->contest_close_date = $req->contest_close_date;
+        $contest->result_announce_date = $req->result_announce_date;
         $contest->status = $req->status;
         $contest->save();
         return back();

@@ -28,11 +28,11 @@
                       <th>Contest</th>
                       <th>Entry Fee</th>
                       <th>Description</th>
-                      <th>Contest Start Date</th>
-                      <th>Contest End Date</th>
-                      <th>Acceptance Date</th>
-                      <th>Post Live Date</th>
-                      <th>Announce Date</th>
+                      <th>Entries Acceptance Date</th>
+                      <th>Entries Close Date</th>
+                      <th>Contest Live Date</th>
+                      <th>Contest Close Date</th>
+                      <th>Result Announce Date</th>
                       <th>Status</th>
                       <th>Action</th>
                     </tr>
@@ -51,11 +51,11 @@
                       </td>
                       <td>${{$contest->entry_fee}}</td>
                       <td>{{$contest->description}}</td>
-                      <td>{{$contest->contest_start_date}}</td>
-                      <td>{{$contest->contest_end_date}}</td>
-                      <td>{{$contest->acceptance_date}}</td>
-                      <td>{{$contest->post_live_date}}</td>
-                      <td>{{$contest->announce_date}}</td>
+                      <td>{{$contest->entries_acceptance_date}}</td>
+                      <td>{{$contest->entries_close_date}}</td>
+                      <td>{{$contest->contest_live_date}}</td>
+                      <td>{{$contest->contest_close_date}}</td>
+                      <td>{{$contest->result_announce_date}}</td>
                       <td>
                         @if ($contest->status == 1)
                         <label class="badge badge-success">Active</label>

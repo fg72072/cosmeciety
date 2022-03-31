@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="{{asset('assets/css/jquery.datetimepicker.css')}}" />
 @section('content')
 <div class="main-panel">
     <div class="content-wrapper">
@@ -30,6 +31,9 @@
                       <span class="text-danger">{{$message}}</span>
                     </div>
                     @enderror
+                    <div class="mt-3">
+                    <span class="text-danger">Recommended size 60 x 55</span>
+                    </div>
                   </div>
                 <div class="form-group">
                   <label for="name">Title</label>
@@ -61,46 +65,47 @@
                 <button type="submit" class="btn btn-primary mr-2"> Update </button>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="content_start_date">Contest Start Date</label>
-                    <input type="date" class="form-control" value="{{$contest->contest_start_date}}" name="contest_start_date" id="content_start_date" placeholder="Contest Start Date" />
-                    @error('contest_start_date')
+                <div class="form-group">
+                    <label for="entries_acceptance_date">Entries Acceptance Date</label>
+                    <input type="text" class="form-control date" name="entries_acceptance_date" autocomplete="off" readonly value="{{$contest->entries_acceptance_date}}" id="entries_acceptance_date" placeholder="Entries Acceptance Date" />
+                    @error('entries_acceptance_date')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
                     </div>
                     @enderror
                   </div>
                   <div class="form-group">
-                    <label for="content_end_date">Contest End Date</label>
-                    <input type="date" class="form-control" value="{{$contest->contest_end_date}}" name="contest_end_date" id="content_end_date" placeholder="Contest End Date" />
-                    @error('contest_end_date')
+                    <label for="entries_close_date">Entries Close Date</label>
+                    <input type="text" class="form-control date" name="entries_close_date" autocomplete="off" readonly value="{{$contest->entries_close_date}}" id="entries_close_date" placeholder="Entries Close Date" />
+                    @error('entries_close_date')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
                     </div>
                     @enderror
                   </div>
                   <div class="form-group">
-                    <label for="acceptance_date">Acceptance Date</label>
-                    <input type="date" class="form-control" value="{{$contest->acceptance_date}}" name="acceptance_date" id="acceptance_date" placeholder="Acceptance Date" />
-                    @error('acceptance_date')
+                    <label for="contest_live_date">Contest Live Date</label>
+                    <input type="text" class="form-control date" name="contest_live_date" autocomplete="off" readonly value="{{$contest->contest_live_date}}" id="contest_live_date" placeholder="Contest Live Date" />
+                    @error('contest_live_date')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
                     </div>
                     @enderror
                   </div>
                   <div class="form-group">
-                    <label for="post_live_date">Post Live Date</label>
-                    <input type="date" class="form-control" value="{{$contest->post_live_date}}" name="post_live_date" id="post_live_date" placeholder="Post Live Date" />
-                    @error('post_live_date')
+                    <label for="contest_close_date">Contest Close Date</label>
+                    <input type="text" class="form-control date" id="contest_close_date" autocomplete="off" readonly name="contest_close_date" value="{{$contest->contest_close_date}}"  placeholder="Contest Close Date" />
+                    @error('contest_close_date')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
                     </div>
                     @enderror
                   </div>
+                
                   <div class="form-group">
-                    <label for="announce_date">Announce Date</label>
-                    <input type="date" class="form-control" value="{{$contest->announce_date}}" name="announce_date" id="announce_date" placeholder="Announce Date" />
-                    @error('announce_date')
+                    <label for="result_announce_date">Result Announce Date</label>
+                    <input type="text" class="form-control date" name="result_announce_date" autocomplete="off" readonly value="{{$contest->result_announce_date}}" id="result_announce_date" placeholder="Result Announce Date" />
+                    @error('result_announce_date')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
                     </div>

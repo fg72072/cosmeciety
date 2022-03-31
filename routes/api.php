@@ -53,6 +53,9 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('post/{id}', 'PostController@show');
         Route::post('post/create', 'PostController@store');
         Route::post('post/like/{id}', 'PostController@like');
+        
+        Route::get('favourite', 'FavouriteController@index');
+        Route::post('add-to-favourite/{id}', 'FavouriteController@addToFavourite');
     });
 
 

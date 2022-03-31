@@ -60,32 +60,50 @@ $(".view-order").click(function(e){
 
 var disablepast = new Date();
 var disbaleddate = new Date(disablepast.getFullYear(), disablepast.getMonth(), disablepast.getDate());
-$('#contest_start_date').datetimepicker({
+$('#entries_acceptance_date').datetimepicker({
 lang:'ch',
-timepicker:false,
-format:'m/d/Y',
+timepicker:true,
 scrollInput : false,
 minDate:disbaleddate
 });
-$('#contest_start_date').change(function(e){
+$('#entries_acceptance_date').change(function(e){
+    allDates()
+});
+$('#entries_close_date').change(function(e){
+    allDates()
+});
+$('#contest_live_date').change(function(e){
+    allDates()
+});
+$('#contest_close_date').change(function(e){
     allDates()
 });
 
 function allDates()
 {
-    $('#contest_end_date').datetimepicker({
+    $('#entries_close_date').datetimepicker({
         lang:'ch',
-        timepicker:false,
-        format:'m/d/Y',
+        timepicker:true,
         scrollInput : false,
-        minDate:addDays($("#contest_start_date").val(),1)
+        minDate:addDays($("#entries_acceptance_date").val(),1)
     }); 
-    $('#post_live_date').datetimepicker({
+    $('#contest_live_date').datetimepicker({
         lang:'ch',
-        timepicker:false,
-        format:'m/d/Y',
+        timepicker:true,
         scrollInput : false,
-        minDate:addDays($("#contest_start_date").val(),1)
+        minDate:addDays($("#entries_close_date").val(),1)
+    }); 
+    $('#contest_close_date').datetimepicker({
+        lang:'ch',
+        timepicker:true,
+        scrollInput : false,
+        minDate:addDays($("#contest_live_date").val(),1)
+    }); 
+    $('#result_announce_date').datetimepicker({
+        lang:'ch',
+        timepicker:true,
+        scrollInput : false,
+        minDate:addDays($("#contest_close_date").val(),1)
     }); 
 }
 allDates()
