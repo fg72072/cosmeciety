@@ -15,7 +15,7 @@ class StoreController extends Controller
     {
         $stores = User::whereHas('roles', function ($q) {
             $q->where('name', 'seller');
-        })->get()->makeHidden(['email','email_verified_at']);
+        })->get()->makeHidden(['operational_hours','email','email_verified_at']);
 
         return response()->json([
             'success' => true,

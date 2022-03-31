@@ -8,6 +8,7 @@ use App\Media;
 use Illuminate\Http\Request;
 use JWTAuth;
 use App\User;
+use App\WorkingDay;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 
@@ -104,6 +105,28 @@ class ProfileController extends Controller
             //         'message' => 'At a time four images uploaded'
             //     ]);
             // }
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Something Went Wrong'], 400);
+        }
+    }
+
+    public function updateWorkingDays(Request $req,$id)
+    {
+        try {
+            $working_day = WorkingDay::where('user_id',JWTAuth::user()->id)->where('day_id',$id)->first();
+            if($req->open){
+                $working_day->open = $req->open;
+            }
+            if($req->close){
+                $working_day->close = $req->close;
+            }
+            $working_day->status = $req->status;
+            if ($working_day->save()) {
+                return  response()->json([
+                    'success' => true,
+                    'message' => 'Working Day Updated Successfully'
+                ]);
+            }
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => 'Something Went Wrong'], 400);
         }

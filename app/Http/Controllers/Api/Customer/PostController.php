@@ -24,7 +24,7 @@ class PostController extends Controller
     
     public function index(Request $req)
     {
-        $posts = Post::withCount('like')->with('postcomments.user:id,img,name')->where('status','1')->get();
+        $posts = Post::withCount('like')->with('postcomments.user:id,img,name','medias')->where('status','1')->get();
         return response()->json([
             'success' => true,
             'posts' => $posts,
@@ -33,7 +33,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = Post::withCount('like')->with('postcomments.user:id,img,name')->where('status','1')->where('id',$id)->first();
+        $post = Post::withCount('like')->with('postcomments.user:id,img,name','medias')->where('status','1')->where('id',$id)->first();
         if ($post) {
             return response()->json([
                 'success' => true,
@@ -54,6 +54,12 @@ class PostController extends Controller
             'description' => 'required|string',
             'img' => 'required'
         ]);
+        if(count($req->file('img')) > 4){
+            return response()->json([
+                'success' => false,
+                'message' => 'Media must be less than 4 or equal.',
+            ],200);
+        }
         try{
             $post = new Post;
             $post->user_id = JWTAuth::user()->id;

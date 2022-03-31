@@ -53,4 +53,9 @@ class User extends Authenticatable implements MustVerifyEmail , JWTSubject
     {
         return [];
     }
+
+    function workingdays()
+    {
+        return $this->hasMany(WorkingDay::class, 'user_id', 'id');
+    }
 }

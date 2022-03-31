@@ -24,6 +24,12 @@ class Post extends Model
         return $this->hasMany(Comment::class, 'post_id', 'id')->where('type', '1')->where('status','1')->where('parent','0');
     }
 
+    public function medias()
+    {
+        return $this->hasMany(Media::class, 'media_against', 'id')->where('type', '2');
+    }
+
+
     public function like()
     {
         return $this->hasMany(Like::class, 'post_id', 'id');

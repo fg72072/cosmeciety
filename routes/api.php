@@ -26,14 +26,14 @@ Route::group(['namespace' => 'Api'], function () {
 
 
     Route::group(['middleware'=>['auth.jwt']], function () {
-        Route::post('profile/update', 'ProfileController@update')->middleware('auth.jwt');
-        Route::post('profile/upload_media', 'ProfileController@upload_media')->middleware('auth.jwt');
+        Route::post('profile/update', 'ProfileController@update');
+        Route::post('profile/upload_media', 'ProfileController@upload_media');
+        Route::post('profile/update/working-day/{id}', 'ProfileController@updateWorkingDays');
 
         Route::get('community-forum', 'CommunityController@index');
         Route::get('community-forum/{id}', 'CommunityController@show');
         Route::post('community-forum/create', 'CommunityController@store');
         Route::post('community-forum/comment/create/{id}', 'CommentController@storeTopicComment');
-        Route::post('post/comment/create/{id}', 'CommentController@storePostComment');
 
         Route::get('contest','ContestController@getContest');
         Route::post('contest/add-participant','ContestController@addParticipate');
