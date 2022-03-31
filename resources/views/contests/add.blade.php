@@ -32,7 +32,7 @@
                     </div>
                     @enderror
                     <div class="mt-3">
-                    <span >Recommended size 60 x 55</span>
+                    <span class="text-danger">Recommended size 60 x 55</span>
                     </div>
 
                   </div>
@@ -68,36 +68,36 @@
                 <div class="col-md-6">
               
                   <div class="form-group">
-                    <label for="acceptance_date">Acceptance Date</label>
-                    <input type="text" class="form-control" name="acceptance_date" value="{{old('acceptance_date')}}" id="acceptance_date" placeholder="Acceptance Date" />
-                    @error('acceptance_date')
+                    <label for="entries_acceptance_date">Entries Acceptance Date</label>
+                    <input type="text" class="form-control date" readonly name="entries_acceptance_date" autocomplete="off" value="{{old('entries_acceptance_date')}}" id="entries_acceptance_date" placeholder="Entries Acceptance Date" />
+                    @error('entries_acceptance_date')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
                     </div>
                     @enderror
                   </div>
                   <div class="form-group">
-                    <label for="content_start_date">Contest Start Date</label>
-                    <input type="text" class="form-control" id="contest_start_date" name="contest_start_date" value="{{old('contest_start_date')}}" id="content_start_date" placeholder="Contest Start Date" />
-                    @error('contest_start_date')
+                    <label for="entries_close_date">Entries Close Date</label>
+                    <input type="text" class="form-control date" readonly name="entries_close_date" autocomplete="off" value="{{old('entries_close_date')}}" id="entries_close_date" placeholder="Entries Close Date" />
+                    @error('entries_close_date')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
                     </div>
                     @enderror
                   </div>
                   <div class="form-group">
-                    <label for="post_live_date">Post Live Date</label>
-                    <input type="text" class="form-control" name="post_live_date" value="{{old('post_live_date')}}" id="post_live_date" placeholder="Post Live Date" />
-                    @error('post_live_date')
+                    <label for="contest_live_date">Contest Live Date</label>
+                    <input type="text" class="form-control date" readonly name="contest_live_date" autocomplete="off" value="{{old('contest_live_date')}}" id="contest_live_date" placeholder="Contest Live Date" />
+                    @error('contest_live_date')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
                     </div>
                     @enderror
                   </div>
                   <div class="form-group">
-                    <label for="content_end_date">Contest End Date</label>
-                    <input type="text" class="form-control" id="contest_end_date" name="contest_end_date" value="{{old('contest_end_date')}}" id="content_end_date" placeholder="Contest End Date" />
-                    @error('contest_end_date')
+                    <label for="contest_close_date">Contest Close Date</label>
+                    <input type="text" class="form-control date" readonly id="contest_close_date" autocomplete="off" name="contest_close_date" value="{{old('contest_close_date')}}"  placeholder="Contest Close Date" />
+                    @error('contest_close_date')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
                     </div>
@@ -105,9 +105,9 @@
                   </div>
                 
                   <div class="form-group">
-                    <label for="announce_date">Announce Date</label>
-                    <input type="text" class="form-control" name="announce_date" value="{{old('announce_date')}}" id="announce_date" placeholder="Announce Date" />
-                    @error('announce_date')
+                    <label for="result_announce_date">Result Announce Date</label>
+                    <input type="text" class="form-control date" readonly name="result_announce_date" autocomplete="off" value="{{old('result_announce_date')}}" id="result_announce_date" placeholder="Result Announce Date" />
+                    @error('result_announce_date')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
                     </div>

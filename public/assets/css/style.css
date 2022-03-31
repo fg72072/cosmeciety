@@ -21079,6 +21079,9 @@ cursor: pointer;
 .pointer{
 	cursor: pointer;
 }
+.date{
+background-color: white !important;
+}
 @media (max-width: 600px) {
 	.custom-form-width{
 		width: 90%;
