@@ -40,6 +40,11 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('contest/participant/{id}','ContestController@getParticipateViaContest');
         Route::post('participant/vote','ContestController@vote');
         Route::post('customer/post/comment/create/{id}', 'CommentController@storePostComment');
+
+        Route::get('participant/{id}','ContestController@getParticipateById');
+        Route::post('participant/add-feedback','ContestController@participateAddFeedback');
+
+
     });
 
 

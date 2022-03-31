@@ -22,4 +22,13 @@ class Participant extends Model
     {
         return $this->hasMany(Vote::class, 'participate_id', 'id');
     }
+    public function feedbacks()
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'id')->where('comments.type', '2')->where('comments.status','1');
+    }
+    public function contest()
+    {
+        return $this->belongsTo(Contest::class, 'contest_id', 'id');
+    }
+
 }

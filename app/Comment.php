@@ -11,7 +11,7 @@ class Comment extends Model
     use SoftDeletes;
     // 0 = topic
     // 1 = post
-    // 2 = contest
+    // 2 = participant
     protected $appends = ['childs'];
 
     function user()
