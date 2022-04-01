@@ -69,7 +69,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{url('topic')}}">
           <i class="mdi mdi-content-cut menu-icon"></i>
-          <span class="menu-title">Social Forum</span>
+          <span class="menu-title">Community Forum</span>
         </a>
       </li>
       <li class="nav-item">

@@ -48,6 +48,15 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <label for="purchase_price">Purchase Price</label>
+                    <input type="number" class="form-control" min="1"  value="{{$product->purchase_price}}" name="purchase_price" id="purchase_price" placeholder="Purchase Price" />
+                    @error('purchase_price')
+                    <div class="mt-1">
+                      <span class="text-danger">{{$message}}</span>
+                    </div>
+                    @enderror
+                </div>
+                <div class="form-group">
                     <label for="category">Category</label>
                     <select class="js-example-basic-single" name="category" id="category" style="width: 100%;">
                         @foreach ($categories as $category)

@@ -72,6 +72,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('store/{id}','StoreController@showStore');
 
         Route::get('product','StoreController@product');
+
+        Route::post('order','OrderController@store');
     });
 });
 

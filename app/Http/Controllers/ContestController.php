@@ -29,7 +29,8 @@ class ContestController extends Controller
     public function store(Request $req)
     {
         $validate = Request()->validate([
-            'banner' => 'required|dimensions:max_width=60,max_height=55',
+            'banner' => 'required',
+            // 'banner' => 'required|dimensions:max_width=60,max_height=55',
             'title' => 'required',
             'description' => 'required|string',
             'entry_fee' => 'required|numeric',
