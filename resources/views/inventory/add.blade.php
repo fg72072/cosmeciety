@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     <label for="stock">Stock</label>
-                    <input type="number" class="form-control" min="1" name="stock" id="stock" placeholder="Stock" />
+                    <input type="number" class="form-control" required min="1" name="stock" id="stock" placeholder="Stock" />
                     @error('stock')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
@@ -40,7 +40,7 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="price">Purchase Price</label>
                     <input type="number" class="form-control" min="1" name="purchase_price" id="price" placeholder="Purchase Price" />
                     @error('purchase_price')
@@ -48,7 +48,7 @@
                       <span class="text-danger">{{$message}}</span>
                     </div>
                     @enderror
-                </div>
+                </div> -->
 
                 <div class="form-group">
                     <label for="type">Type</label>

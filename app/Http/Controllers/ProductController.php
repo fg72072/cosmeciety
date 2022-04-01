@@ -27,7 +27,7 @@ class ProductController extends Controller
         $products = $products->get();
         foreach($products as $product){
             $product->stock = Product::stock($product->id);
-            $product->purchase_price = Product::getPurchasePrice($product->id);
+            // $product->purchase_price = Product::getPurchasePrice($product->id);
         }   
         return view('product.list',compact('products'));
     }
@@ -45,6 +45,7 @@ class ProductController extends Controller
             'title' => 'required',
             'category' => 'required',
             'price' => 'required|numeric',
+            'purchase_price' => 'required|numeric',
             'description' => 'required|string',
         ]);
         $product = new Product;
@@ -59,6 +60,7 @@ class ProductController extends Controller
         $product->cat_id = $req->category;
         $product->title = $req->title;
         $product->price = $req->price;
+        $product->purchase_price = $req->purchase_price;
         $product->description = $req->description;
         $product->status = $req->status;
         $product->save();
@@ -82,6 +84,7 @@ class ProductController extends Controller
             'title' => 'required',
             'category' => 'required',
             'price' => 'required|numeric',
+            'purchase_price' => 'required|numeric',
             'description' => 'required|string',
         ]);
         $product = Product::with('category','seller')->where('id',$id);
@@ -101,6 +104,7 @@ class ProductController extends Controller
         $product->cat_id = $req->category;
         $product->title = $req->title;
         $product->price = $req->price;
+        $product->purchase_price = $req->purchase_price;
         $product->description = $req->description;
         $product->status = $req->status;
         $product->save();
