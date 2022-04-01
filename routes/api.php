@@ -43,7 +43,10 @@ Route::group(['namespace' => 'Api'], function () {
 
         Route::get('participant/{id}','ContestController@getParticipateById');
         Route::post('participant/add-feedback','ContestController@participateAddFeedback');
+        Route::get('contest/winner','ContestController@getContestWinner');
 
+        Route::post('promotion/add','PromotionController@addPromotion');
+        Route::get('promotion','PromotionController@getPromotion');
 
     });
 
@@ -58,7 +61,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('post/{id}', 'PostController@show');
         Route::post('post/create', 'PostController@store');
         Route::post('post/like/{id}', 'PostController@like');
-        
+
         Route::get('favourite', 'FavouriteController@index');
         Route::post('add-to-favourite/{id}', 'FavouriteController@addToFavourite');
     });

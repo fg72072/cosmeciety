@@ -187,12 +187,22 @@ class ContestController extends Controller
             return response()->json(['success' => false, 'message' => 'Something Went Wrong'], 400);
         }
     }
-    public function getContestWinner(Request $request)
+    public function getContestWinner()
     {
         $user = JWTAuth::user();
 
         try {
-            $contests = Contest::orderBy('contests.id', 'Desc');
+            $data = Contest::with(['participant' => function($query){
+
+                $query->withCount('vote')->orderBy('vote_count', 'Desc');
+                $query->with('user');
+
+             }])->whereRaw('Date(result_announce_date) <= CURDATE()')->get();
+
+             return  response()->json([
+                'success' => true,
+                'data' => $data,
+            ]);
 
         } catch (Exception $e) {
             //throw $th;
