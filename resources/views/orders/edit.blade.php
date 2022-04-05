@@ -3,10 +3,11 @@
                                 enctype="multipart/form-data">
      <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Order : #{{$order->id}}</h5>
-        
+<!--         
         <h5 class="modal-title" id="exampleModalLabel">SubTotal : ${{$order->subtotal}}</h5>
         <h5 class="modal-title" id="exampleModalLabel">Tax : ${{$order->tax}}</h5>
-        <h5 class="modal-title" id="exampleModalLabel">GrandTotal : ${{$order->grand_total}}</h5>
+        <h5 class="modal-title" id="exampleModalLabel">GrandTotal : ${{$order->grand_total}}</h5> -->
+        <h5 class="modal-title" id="exampleModalLabel">Total : ${{$order->orderItems->sum('total')}}</h5>
         <i class="mdi mdi-close menu-icon pointer" data-bs-dismiss="modal" aria-label="Close"></i>
       </div>
       
@@ -75,7 +76,7 @@
                                             <label for="status">Status</label>
                                             <select class="form-control" name="status" id="status" style="width: 100%;">
                                                 @foreach ($statuses as $status)
-                                                <option value="{{$status->id}}" @if($order->status == $status->id) selected @endif>{{$status->title}}</option>
+                                                <option value="{{$status->id}}" @if($order->orderItems->first()->status == $status->id) selected @endif>{{$status->title}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -101,6 +102,7 @@
                               <th>Price</th>
                               <th>Quantity</th>
                               <th>Total</th>
+                              <th>Status</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -109,7 +111,7 @@
                               <td>{{$item->id}}</td>
                               <td>
                                 <div class="d-flex align-items-center">
-                                  <img src="{{$item->product->img ? asset('assets/images/product/'.$item->product->img) : asset('assets/images/faces/face1.jpg')}}" alt="image" />
+                                  <img style="border-radius: 0 !important;" src="{{$item->product->img ? asset('assets/images/product/'.$item->product->img) : asset('assets/images/faces/face1.jpg')}}" alt="image" />
                                   <div class="table-user-name ml-3">
                                     <p class="mb-0 font-weight-medium"> {{$item->product->title}} </p>
                                   </div>
@@ -118,6 +120,13 @@
                               <td>${{$item->price}}</td>
                               <td>{{$item->qty}}</td>
                               <td>${{$item->total}}</td>
+                              <td>
+                              @if ($item->deliveryStatus->title == "Pending" || $item->deliveryStatus->title == "Cancel")
+                              <label class="badge badge-danger">{{$item->deliveryStatus->title}}</label>
+                              @elseif ($item->deliveryStatus->title == "Confirm" || $item->deliveryStatus->title == "Delivered")
+                              <label class="badge badge-success">{{$item->deliveryStatus->title}}</label>
+                              @endif
+                            </td>
                             </tr>
                             @endforeach
                           </tbody>

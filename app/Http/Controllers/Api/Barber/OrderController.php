@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Api\Barber;
 
 use JWTAuth;
+use App\Order;
+use App\Product;
 use App\Favourite;
+use App\OrderItem;
+use App\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Order;
-use App\OrderItem;
-use App\Product;
 
 class OrderController extends Controller
 {
@@ -34,11 +35,13 @@ class OrderController extends Controller
                        $subtotal += $product->price * $cart->quantity;
                     }
                 }
+                $grandtotal = $subtotal+0.22+3.14;
                 $order = new Order;
                 $order->user_id = JWTAuth::user()->id;
                 $order->subtotal = $subtotal;
-                $order->tax = 0;
-                $order->grand_total = $subtotal;
+                $order->tax = 0.22;
+                $order->shipping = 3.14;
+                $order->grand_total = $grandtotal;
                 $order->first_name = $req->first_name;
                 $order->last_name = $req->last_name;
                 $order->mobile = $req->mobile;
@@ -63,6 +66,7 @@ class OrderController extends Controller
                         return response()->json(['success'=>false,'message'=>'product not found'],404);
                         }
                     }
+                    Transaction::transaction($order->id,'5435243524352',$grandtotal,'',0);
                     return response()->json([
                         'success' => true,
                         'message' => 'order placed successfully.',

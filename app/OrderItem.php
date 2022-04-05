@@ -14,4 +14,9 @@ class OrderItem extends Model
     {
         return $this->belongsTo(Product::class, 'p_id', 'id');
     }
+
+    function deliveryStatus()
+    {
+        return $this->belongsTo(DeliveryStatus::class, 'status', 'id');
+    }
 }

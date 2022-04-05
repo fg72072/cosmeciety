@@ -34,7 +34,7 @@
                     @foreach ($transactions as $transaction)
                    <tr>
                     <td>{{$transaction->id}}</td>
-                    <td>{{$transaction->user}}</td>
+                    <td>{{$transaction->user->name}}</td>
                     <td>{{$transaction->txn_id}}</td>
                     <td>${{$transaction->amount}}</td>
                     <td>{{$transaction->description ? $transaction->description : '-'}}</td>

@@ -20,10 +20,10 @@ class Order extends Model
         return $this->hasMany(OrderItem::class, 'order_id', 'id');
     }
 
-    function deliveryStatus()
-    {
-        return $this->belongsTo(DeliveryStatus::class, 'status', 'id');
-    }
+    // function deliveryStatus()
+    // {
+    //     return $this->belongsTo(DeliveryStatus::class, 'status', 'id');
+    // }
 
     function city()
     {

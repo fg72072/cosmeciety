@@ -6,6 +6,7 @@ use App\City;
 use App\Order;
 use App\Country;
 use App\DeliveryStatus;
+use App\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,16 +17,16 @@ class OrderController extends Controller
         //     $query->where('user_id', '=', Auth::user()->id);
         // })->get();
 
-        $orders = Order::with('user','country:id,name','city:id,name','deliveryStatus')->whereHas('orderItems.product', function ($query) {
+        $orders = Order::with('user','orderItems.deliveryStatus','country:id,name','city:id,name')
+        ->whereHas('orderItems.product', function ($query) {
             $query->where('user_id', '=', Auth::user()->id);
         })->get();
-
         return view('orders.list',compact('orders'));
     }
 
     public function edit($id)
     {
-        $data['order'] = Order::with('orderItems.product')->whereHas('orderItems.product', function ($query) {
+        $data['order'] = Order::with('orderItems.product','orderItems.deliveryStatus')->whereHas('orderItems.product', function ($query) {
             $query->where('user_id', '=', Auth::user()->id);
         })->where('id',$id)->first();
         $data['statuses'] = DeliveryStatus::get();
@@ -39,9 +40,10 @@ class OrderController extends Controller
         // $validate = Request()->validate([
         //     'message' => 'required|string',
         // ]);
-        $order = Order::whereHas('orderItems.product', function ($query) {
-            $query->where('user_id', '=', Auth::user()->id);
-        })->where('id',$id)->first();
+        // $order = Order::whereHas('orderItems.product', function ($query) {
+        //     $query->where('user_id', '=', Auth::user()->id);
+        // })->where('id',$id)->first();
+        $order = OrderItem::where('order_id',$id)->first();
         // $order->first_name = $req->first_name;
         // $order->last_name = $req->last_name;
         // $order->mobile = $req->mobile;
