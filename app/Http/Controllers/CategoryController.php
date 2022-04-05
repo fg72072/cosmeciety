@@ -22,7 +22,7 @@ class CategoryController extends Controller
     public function store(Request $req)
     {
         $validate = Request()->validate([
-            'title'=>'required',
+            'title'=>'required|unique:categories',
         ]);
 
         $category = new Category;
@@ -40,11 +40,14 @@ class CategoryController extends Controller
 
     public function update($id,Request $req)
     {
-        $validate = Request()->validate([
-            'title'=>'required',
-        ]);
-
         $category = Category::find($id);
+        $valida = 'required|unique:categories';
+        if($req->title == $category->title){
+            $valida = 'required';
+        }
+        $validate = Request()->validate([
+            'title'=>$valida,
+        ]);
         $category->title = $req->title;
         $category->status = $req->status;
         $category->save();

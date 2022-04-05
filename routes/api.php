@@ -48,6 +48,11 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('promotion/add','PromotionController@addPromotion');
         Route::get('promotion','PromotionController@getPromotion');
 
+
+        Route::get('notifications','NotificationController@index');
+
+        
+
     });
 
 

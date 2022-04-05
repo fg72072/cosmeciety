@@ -24,9 +24,10 @@
                     <tr>
                       <th>ID</th>
                       <th>User</th>
-                      <th>SubTotal</th>
-                      <th>Tax</th>
-                      <th>GrandTotal</th>
+                      <th>Total</th>
+                      <!-- <th>SubTotal</th> -->
+                      <!-- <th>Tax</th>
+                      <th>GrandTotal</th> -->
                       <th>Status</th>
                       <th>Action</th>
                     </tr>
@@ -44,21 +45,19 @@
                       </div>
                     </td>
                     <td>
-                    ${{$order->subtotal}}
+                    ${{$order->orderItems->sum('total')}}
                     </td>
-                    <td>
+                    <!-- <td>
                       ${{$order->tax}}
                     </td>
                     <td>
                       ${{$order->grand_total}}
-                    </td>
-                    <td>
-                      @if ($order->deliveryStatus->title == "Pending" || $order->deliveryStatus->title == "Cancel")
-                      <label class="badge badge-danger">{{$order->deliveryStatus->title}}</label>
-                      @elseif ($order->deliveryStatus->title == "Confirm" || $order->deliveryStatus->title == "Delivered")
-                      <label class="badge badge-success">{{$order->deliveryStatus->title}}</label>
-                      @endif
-                    </td>
+                    </td> -->
+                    @if ($item->deliveryStatus->title == "Pending" || $item->deliveryStatus->title == "Cancel")
+                              <label class="badge badge-danger">{{$item->deliveryStatus->title}}</label>
+                              @elseif ($item->deliveryStatus->title == "Confirm" || $item->deliveryStatus->title == "Delivered")
+                              <label class="badge badge-success">{{$item->deliveryStatus->title}}</label>
+                              @endif
                     <td>
                       <div class="btn-flex">
                           <a href="{{url('order/edit/'.$order->id)}}" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn view-order text-white btn-success btn-icon-text">

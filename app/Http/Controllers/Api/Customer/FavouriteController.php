@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Api\Customer;
 
 use JWTAuth;
 use App\Favourite;
+use App\Notification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\User;
 
 class FavouriteController extends Controller
 {
@@ -24,9 +25,13 @@ class FavouriteController extends Controller
     public function addToFavourite($id)
     {
         try{
+            $saloon = User::where('id',$id)->whereHas('roles',function($q){
+                $q->where('name','barber');
+            })->first();
             $fav = Favourite::where('user_id',JWTAuth::user()->id)->where('saloon_id',$id)->first();
             if($fav){
                 $fav->delete();
+                Notification::notification(JWTAuth::user()->id,0,0,'Favourite','You have removed '.$saloon->name.' to your favorites','0');
                 return response()->json([
                     'success' => true,
                     'message' => 'Saloon Remove Successfully.',
@@ -37,6 +42,7 @@ class FavouriteController extends Controller
                 $favourite->user_id = JWTAuth::user()->id;
                 $favourite->saloon_id = $id;
                 if($favourite->save()){
+                    Notification::notification(JWTAuth::user()->id,0,0,'Favourite','You have added '.$saloon->name.' to your favorites','0');
                     return response()->json([
                         'success' => true,
                         'message' => 'Success.',

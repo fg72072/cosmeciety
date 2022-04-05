@@ -12,6 +12,7 @@ use App\Contest;
 use App\Http\Controllers\Controller;
 use App\Media;
 use App\Participant;
+use App\Transaction;
 use App\Vote;
 use Exception;
 use Hamcrest\Type\IsNumeric;
@@ -82,6 +83,7 @@ class ContestController extends Controller
         $data = JWTAuth::user();
         try {
             //code...
+            $contest_detail = Contest::where('id',$request->contest_id)->first();
             $check = Participant::where('contest_id', $request->contest_id)->where('user_id', $data->id)->count();
             if ($check != 0) {
                 return  response()->json([
@@ -111,6 +113,7 @@ class ContestController extends Controller
                     }
                 }
             }
+            Transaction::transaction($participant->id,'5435243524352',$contest_detail->entry_fee,'',2);
             return  response()->json([
                 'success' => true,
                 'message' => 'You have participanted in the contest successfully'

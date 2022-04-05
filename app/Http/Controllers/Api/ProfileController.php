@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Container\CommonContainer;
-use App\Http\Controllers\Controller;
-use App\Media;
-use Illuminate\Http\Request;
 use JWTAuth;
 use App\User;
-use App\WorkingDay;
+use App\Media;
 use Exception;
+use App\WorkingDay;
+use App\Notification;
+use Illuminate\Http\Request;
+use App\Container\CommonContainer;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -46,6 +47,7 @@ class ProfileController extends Controller
             }
             if (isset($request->password)) {
                 $data->password = Hash::make($request->password);
+                Notification::notification(JWTAuth::user()->id,0,0,'Password Change','Your Password has been changed successfully','0');
             }
 
             if ($request->hasFile('img')) {
