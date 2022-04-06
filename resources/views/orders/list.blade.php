@@ -53,11 +53,12 @@
                     <td>
                       ${{$order->grand_total}}
                     </td> -->
-                    @if ($item->deliveryStatus->title == "Pending" || $item->deliveryStatus->title == "Cancel")
-                              <label class="badge badge-danger">{{$item->deliveryStatus->title}}</label>
-                              @elseif ($item->deliveryStatus->title == "Confirm" || $item->deliveryStatus->title == "Delivered")
-                              <label class="badge badge-success">{{$item->deliveryStatus->title}}</label>
-                              @endif
+                    <td>
+                    @if ($order->orderItems->first()->status == 1 || $order->orderItems->first()->status == 3)
+                      <label class="badge badge-danger">{{$order->orderItems->first()->status == 1 ? 'Pending' : 'Cancel'}}</label>
+                      @elseif ($order->orderItems->first()->status == 2 || $order->orderItems->first()->status == 4)
+                      <label class="badge badge-success">{{$order->orderItems->first()->status == 2 ? 'Confirm' : 'Delivered'}}</label>
+                      @endif
                     <td>
                       <div class="btn-flex">
                           <a href="{{url('order/edit/'.$order->id)}}" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn view-order text-white btn-success btn-icon-text">

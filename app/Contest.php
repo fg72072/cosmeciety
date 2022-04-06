@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use JWTAuth;
 
 class Contest extends Model
 {
@@ -17,6 +18,11 @@ class Contest extends Model
     function participant()
     {
         return $this->hasOne(Participant::class, 'contest_id', 'id');
+    }
+
+    function isparticipant()
+    {
+        return $this->hasOne(Participant::class, 'contest_id', 'id')->where('user_id',JWTAuth::user()->id);
     }
 
 }
