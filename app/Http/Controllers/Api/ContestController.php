@@ -39,7 +39,7 @@ class ContestController extends Controller
         // $path=;
         // return $path;
         try {
-            $contests = Contest::orderBy('contests.id', 'Desc');
+            $contests = Contest::with('isparticipant')->orderBy('contests.id', 'Desc');
             if ($request->type == 'all') {
             } elseif ($request->type == 'my_contest') {
                 # code...
