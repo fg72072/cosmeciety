@@ -11,4 +11,9 @@ class Promotion extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function medias()
+    {
+        return $this->hasMany(Media::class, 'media_against', 'id')->where('type', '5');
+    }
 }

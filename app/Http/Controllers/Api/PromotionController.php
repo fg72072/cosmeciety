@@ -60,11 +60,30 @@ class PromotionController extends Controller
     {
         try {
             $data = JWTAuth::user();
-            $promotion = Promotion::with('user')->get();
+            $promotion = Promotion::with('user','medias')->where('user_id',JWTAuth::user()->id)->get();
             return  response()->json([
                 'success' => true,
                 'data' => $promotion,
             ]);
+
+        } catch (\Exception $ex) {
+            //throw $th;
+            return response()->json(['success' => false, 'message' => 'Something Went Wrong'], 400);
+        }
+    }
+    public function removePromotion($id)
+    {
+        try {
+            $data = JWTAuth::user();
+            $promotion = Promotion::where('user_id',JWTAuth::user()->id)->where('id',$id)->first();
+            if($promotion){
+                $promotion->delete();
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Promotion Remove Successfully.',
+                ],200);
+            }
+
 
         } catch (\Exception $ex) {
             //throw $th;
