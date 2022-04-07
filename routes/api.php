@@ -47,7 +47,7 @@ Route::group(['namespace' => 'Api'], function () {
 
         Route::post('promotion/add','PromotionController@addPromotion');
         Route::get('promotion','PromotionController@getPromotion');
-
+        Route::get('promotion/delete/{id}','PromotionController@removePromotion');
 
         Route::get('notifications','NotificationController@index');
 
@@ -66,6 +66,10 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('post/{id}', 'PostController@show');
         Route::post('post/create', 'PostController@store');
         Route::post('post/like/{id}', 'PostController@like');
+
+        Route::get('chat/{id}', 'ChatController@show');
+        Route::post('chat/message/{id}', 'ChatController@store');
+
 
         Route::get('favourite', 'FavouriteController@index');
         Route::post('add-to-favourite/{id}', 'FavouriteController@addToFavourite');
