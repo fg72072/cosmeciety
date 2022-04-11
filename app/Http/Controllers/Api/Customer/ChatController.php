@@ -6,27 +6,28 @@ use JWTAuth;
 use App\Like;
 use App\Post;
 use App\Media;
+use App\Friend;
 use App\Comment;
+use App\Message;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Container\CommonContainer;
 use App\Http\Controllers\Controller;
-use App\Message;
 
 class ChatController extends Controller
 {
     
     public function index(Request $req)
     {
-        $posts = Post::withCount('like')->with('postcomments.user:id,img,name','medias')->where('status','1')->get();
-        return response()->json([
-            'success' => true,
-            'posts' => $posts,
-        ], 200);
+        // return response()->json([
+        //     'success' => true,
+        //     'posts' => $posts,
+        // ], 200);
     }
 
     public function show($id)
     {
+        $user = Friend::with('user')->where('friendship_id',$id)->where('user_id','!=',JWTAuth::user()->id)->first();
         $chats = Message::where('friendship_id',$id)->get();
             return response()->json([
                 'success' => true,

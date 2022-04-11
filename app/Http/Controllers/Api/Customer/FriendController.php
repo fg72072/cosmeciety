@@ -38,11 +38,36 @@ class FriendController extends Controller
 
     public function accept(Request $req,$id)
     {
-        
+        try{
+            $friend = Friend::where('friendship_id',$id)->where('user_id',JWTAuth::user()->id)->first();
+            if($friend){
+                Friend::where('friendship_id',$id)->update(['request_type'=>'2']);
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Request accept successfully.',
+                ],200);
+            }
+            }
+            catch(\Exception $e){
+                return response()->json(['success'=>false,'data'=>$e],400);
+        }
     }
 
     public function reject(Request $req,$id)
     {
-
+        try{
+            $friend = Friend::where('friendship_id',$id)->where('user_id',JWTAuth::user()->id)->first();
+            if($friend){
+                Friend::where('friendship_id',$id)->delete();
+                Friendship::where('id',$id)->delete();
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Request reject successfully.',
+                ],200);
+            }
+            }
+            catch(\Exception $e){
+                return response()->json(['success'=>false,'data'=>$e],400);
+        }
     }
 }
