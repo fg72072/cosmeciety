@@ -13,7 +13,7 @@ class CommunityController extends Controller
 {
     public function index(Request $req)
     {
-        $social_forums = SocialForum::with('user:id,img','topiccomments.user:id,img,name')
+        $social_forums = SocialForum::withCount('topiccomments')->with('user:id,img','topiccomments.user:id,img,name')
         ->where('status','1');
         if($req->type == 'trending'){
             $social_forums = $social_forums->withCount('topiccomments')->orderBy('topic_comments_count','Desc');

@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Container\CommonContainer;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class ChatController extends Controller
 {
@@ -27,10 +28,15 @@ class ChatController extends Controller
 
     public function show($id)
     {
-        $user = Friend::with('user')->where('friendship_id',$id)->where('user_id','!=',JWTAuth::user()->id)->first();
+        $friend = Friend::with('user:id,img,name,last_seen')->where('friendship_id',$id)->where('user_id','!=',JWTAuth::user()->id)->first(['user_id']);
+        if(Cache::has('is_online' . $friend->user->id)){
+                 $friend->user->lastseen = 'online';
+        }
+        unset($friend->user_id);
         $chats = Message::where('friendship_id',$id)->get();
             return response()->json([
                 'success' => true,
+                'friend' => $friend->user,
                 'chats' => $chats,
             ], 200);
     }

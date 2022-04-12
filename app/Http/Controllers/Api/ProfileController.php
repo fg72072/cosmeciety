@@ -23,6 +23,13 @@ class ProfileController extends Controller
         return $this->media = $media;
     }
 
+    public function index()
+    {
+        return  response()->json([
+            'success' => true,
+            'user' => JWTAuth::user()->makeHidden(['operational_hours'])
+        ]);
+    }
     public function update(Request $request)
     {
         try {

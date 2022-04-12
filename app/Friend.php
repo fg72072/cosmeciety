@@ -9,6 +9,11 @@ class Friend extends Model
     // 0 = pending
     // 1 = requested
     
+    function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+    
     public static function store($friendship_id,$user_id,$request_type)
     {
         $friend = new Friend;
@@ -17,4 +22,6 @@ class Friend extends Model
         $friend->request_type = $request_type;
         $friend->save();
     }
+
+    
 }

@@ -25,10 +25,11 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('otp/verify', 'OtpController@otpVerify');
 
 
-    Route::group(['middleware'=>['auth.jwt']], function () {
+    Route::group(['middleware'=>['auth.jwt','lastseen']], function () {
         Route::post('profile/update', 'ProfileController@update');
         Route::post('profile/upload_media', 'ProfileController@upload_media');
         Route::post('profile/update/working-day/{id}', 'ProfileController@updateWorkingDays');
+        Route::get('profile', 'ProfileController@index');
 
         Route::get('community-forum', 'CommunityController@index');
         Route::get('community-forum/{id}', 'CommunityController@show');
@@ -57,7 +58,7 @@ Route::group(['namespace' => 'Api'], function () {
 
 
 
-    Route::group(['prefix'=>'customer','namespace' => 'Customer','middleware'=>['auth.jwt']], function () {
+    Route::group(['prefix'=>'customer','namespace' => 'Customer','middleware'=>['auth.jwt','lastseen']], function () {
         Route::get('barbers', 'ServiceController@barber');
         Route::get('barber/{id}', 'ServiceController@showBarber');
         Route::get('services/{id}', 'ServiceController@showBarberService');
@@ -79,7 +80,7 @@ Route::group(['namespace' => 'Api'], function () {
     });
 
 
-    Route::group(['prefix' =>'barber' ,'namespace' => 'Barber','middleware'=>['auth.jwt']], function () {
+    Route::group(['prefix' =>'barber' ,'namespace' => 'Barber','middleware'=>['auth.jwt','lastseen']], function () {
         Route::get('service','ServiceController@index');
         Route::get('service/{id}','ServiceController@show');
         Route::post('service/add','ServiceController@store');
