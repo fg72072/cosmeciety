@@ -12,6 +12,7 @@ use App\Message;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Container\CommonContainer;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 
@@ -62,5 +63,14 @@ class ChatController extends Controller
             catch(\Exception $e){
                 return response()->json(['success'=>false,'data'=>'something goes wrong'],400);
         }
+    }
+
+    public function getChatUser()
+    {
+        $users = DB::select('SELECT messages.friendship_id,messages.created_at,friends.user_id,users.* FROM `messages` INNER JOIN friendships ON friendships.id=messages.friendship_id INNER JOIN friends ON friends.friendship_id=friendships.id INNER JOIN users ON users.id=friends.user_id WHERE friends.user_id!='.JWTAuth::user()->id.' GROUP BY messages.friendship_id');
+        return response()->json([
+            'success' => true,
+            'users' => $users,
+        ],200);
     }
 }

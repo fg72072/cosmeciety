@@ -67,8 +67,8 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('post/{id}', 'PostController@show');
         Route::post('post/create', 'PostController@store');
         Route::post('post/like/{id}', 'PostController@like');
-
         Route::get('chat/{id}', 'ChatController@show');
+        Route::get('chat/user/all', 'ChatController@getChatUser');
         Route::post('chat/message/{id}', 'ChatController@store');
         Route::post('add-to-friend/{id}', 'FriendController@store');
         Route::post('accept-friend/{id}', 'FriendController@accept');
