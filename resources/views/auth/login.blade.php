@@ -32,7 +32,7 @@
                         @csrf
                          <div class="form-group">
                            <label for="exampleInputEmail1">Email address</label>
-                           <input type="email" class="form-control" name="email" value="{{ old('email') }}" id="exampleInputEmail1" placeholder="Email" />
+                           <input type="email" class="form-control" name="email" value="{{ old('email') }}" id="exampleInputEmail1" required placeholder="Email" />
                            @error('email')
                            <span class="invalid-feedback">
                                <strong>{{ $message }}</strong>
@@ -53,16 +53,22 @@
                                </span>
                            @enderror
                          </div>
-                         {{-- <div class="form-check form-check-flat form-check-primary">
+                          <div class="mb-3 form-check form-check-flat form-check-primary">
                            <label class="form-check-label">
-                             <input type="checkbox" class="form-check-input" /> Remember me </label>
-                         </div> --}}
-                         <button type="submit" class="btn btn-primary mr-2"> Login </button>
-                         @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
+                             <input name="remember" id="remember" type="checkbox" class="form-check-input" /> Remember me </label>
+                         </div>
+                         <div class="form-group">
+                           
+                           
+                           </div>
+                           <button type="submit" class="btn btn-primary mr-2"> Login </button>
+                           <a href="{{url('register')}}" class="btn btn-link mr-2"> Register </a>
+                           @if (Route::has('password.request'))
+                           <a class="btn btn-link" href="{{ route('password.request') }}">
+                             {{ __('Forgot Your Password?') }}
+                            </a>
+                            @endif
+                              
                        </form>
                      </div>
                    </div>

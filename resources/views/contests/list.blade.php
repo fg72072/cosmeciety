@@ -4,11 +4,11 @@
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title">List Contest</h3>
+        <h3 class="page-title">List {{$type ? 'Upcoming' : ''}} Contest</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">List Contest</li>
+            <li class="breadcrumb-item active" aria-current="page">List {{$type ? 'Upcoming' : ''}} Contest</li>
           </ol>
         </nav>
       </div>

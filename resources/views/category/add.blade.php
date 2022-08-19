@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group">
                   <label for="status">Status</label>
-                  <select class="form-control" name="status" id="status" style="width: 100%;">
+                  <select class="form-control js-example-basic-single" name="status" id="status" style="width: 100%;">
                       <option value="1">Active</option>
                       <option value="0">Unactive</option>
                     </select>

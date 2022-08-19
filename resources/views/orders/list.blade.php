@@ -22,7 +22,7 @@
                 <table class="table table-hover datatable">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>Order #</th>
                       <th>User</th>
                       <th>Total</th>
                       <!-- <th>SubTotal</th> -->
@@ -34,7 +34,7 @@
                   </thead>
                   <tbody>
                   @foreach ($orders as $order)
-                  <tr>
+                  <tr class="{{$order->orderItems[0]->is_seen == '0' ? 'bg-light-danger' : ''}}">
                     <td>{{$order->id}}</td>
                     <td>
                       <div class="d-flex align-items-center">
@@ -54,10 +54,10 @@
                       ${{$order->grand_total}}
                     </td> -->
                     <td>
-                    @if ($order->orderItems->first()->status == 1 || $order->orderItems->first()->status == 3)
-                      <label class="badge badge-danger">{{$order->orderItems->first()->status == 1 ? 'Pending' : 'Cancel'}}</label>
-                      @elseif ($order->orderItems->first()->status == 2 || $order->orderItems->first()->status == 4)
-                      <label class="badge badge-success">{{$order->orderItems->first()->status == 2 ? 'Confirm' : 'Delivered'}}</label>
+                    @if ($order->orderItems[0]->status == 1 || $order->orderItems[0]->status == 3)
+                      <label class="badge badge-danger">{{$order->orderItems[0]->status == 1 ? 'Pending' : 'Cancel'}}</label>
+                      @elseif ($order->orderItems[0]->status == 2 || $order->orderItems[0]->status == 4)
+                      <label class="badge badge-success">{{$order->orderItems[0]->status == 2 ? 'Confirm' : 'Delivered'}}</label>
                       @endif
                     <td>
                       <div class="btn-flex">

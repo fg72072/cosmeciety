@@ -40,24 +40,69 @@ class AuthController extends Controller
                 'message' => 'Invalid Email or Password',
             ], 401);
         }
-
-        return response()->json([
-            'success' => true,
-            'token' => $token,
-            'user' => JWTAuth::user(),
-        ]);
+        $user = User::with('roles')->find(JWTAuth::user()->id);
+        if($user->status == '0'){
+            return response()->json([
+                'success' => false,
+                'message' => 'Your status is not active.',
+            ], 401);
+        }
+       if($user->roles[0]->name == $request->role){
+            return response()->json([
+                'success' => true,
+                'token' => $token,
+                'user' => $user,
+            ]);
+        }else{
+            if($user->roles[0]->name == 'user'){
+                return response()->json([
+                    'success'=>false,
+                    'message'=>'you are not a barber'
+                ],401);
+            }
+            else{
+                return response()->json([
+                    'success'=>false,
+                    'message'=>'you are not a customer'
+                ],401);
+            }
+        }
+    
     }
     public function login(Request $request)
     {
         $validate = Request()->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+            'email' => 'required|max:100|email',
+            'password' => 'required|max:20',
+            'role' => 'required'
         ]);
-        $user = User::where('email',$request->email)->first();
+        $user = User::with('roles')->where('email',$request->email)->first();
         if($user){
             if (Hash::check($request->password, $user->password)) {
                 $request->user = $request->email;
-                return OtpController::send($request,'not');
+                
+                if($user->status == '0'){
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Your status is not active.',
+                    ], 401);
+                }
+                if($user->roles[0]->name == $request->role){
+                    return OtpController::send($request,'not');
+                }else{
+                    if($user->roles[0]->name == 'user'){
+                        return response()->json([
+                            'success'=>false,
+                            'message'=>'you are not a barber'
+                        ],401);
+                    }
+                    else{
+                        return response()->json([
+                            'success'=>false,
+                            'message'=>'you are not a customer'
+                        ],401);
+                    }
+                }
             }
             else{
                 return response()->json([
@@ -107,11 +152,11 @@ class AuthController extends Controller
     public function register(Request $req)
     {
         $validate = Request()->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'name' => 'required|max:100',
+            'email' => 'required|max:100|email|unique:users',
             'phone' => 'required',
-            'password' => 'required|min:8|confirmed',
-            'location' => 'location',
+            'password' => 'required|min:8|max:20|confirmed',
+            'location' => 'required',
             'role' => 'required',
         ]);
        
@@ -159,7 +204,7 @@ class AuthController extends Controller
             'user' => 'required',
             'otp' => 'required',
         ]);
-        $otp = AppOtp::orderBy('id','desc')->with('user')->whereHas('user',function($q) use($req){
+        $otp = AppOtp::orderBy('id','desc')->with('user.roles')->whereHas('user',function($q) use($req){
             $q->where('email',$req->user)->orWhere('phone',$req->user);
         })->where('otp',$req->otp)->where('verify','0')->first();
 
@@ -182,6 +227,7 @@ class AuthController extends Controller
                 return response()->json([
                     'success' => true,
                     'token' => $token,
+                    'user' => $otp->user
                 ]);
             }
         }

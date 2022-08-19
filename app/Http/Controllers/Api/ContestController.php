@@ -53,7 +53,7 @@ class ContestController extends Controller
             }
             $contests = $contests->get();
 
-            return  response()->json([
+            return response()->json([
                 'success' => true,
                 'data' => $contests,
             ]);
@@ -66,9 +66,8 @@ class ContestController extends Controller
     {
         try {
             //code...
-            $data['contest'] =  Contest::where('id', $id)->first();
-            $data['contest']->participants =  Participant::withCount('vote')->with('user', 'media')->where('contest_id', $id)->get();
-
+            $data =  Contest::where('id', $id)->first();
+            $data->participants =  Participant::withCount('vote')->with('user', 'media')->where('contest_id', $id)->get();
             return  response()->json([
                 'success' => true,
                 'data' => $data,
@@ -146,7 +145,7 @@ class ContestController extends Controller
                     ], 200);
                 }
             } catch (\Exception $e) {
-                return response()->json(['success' => false, 'data' => 'something goes wrong'], 400);
+                return response()->json(['success' => false, 'data' => $e], 400);
             }
         }
     }

@@ -64,21 +64,25 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="country">Country</label>
-                                            <input type="postal_code" class="form-control" readonly value="{{$order->country->name}}" name="postal_code" id="postal_code"
+                                            <input type="postal_code" class="form-control" readonly value="{{$order->country ? $order->country->name : ''}}" name="postal_code" id="postal_code"
                                                 placeholder="Postal Code" />
                                         </div>
                                         <div class="form-group">
                                             <label for="city">City</label>
-                                            <input type="postal_code" class="form-control" readonly value="{{$order->city->name}}" name="postal_code" id="postal_code"
+                                            <input type="postal_code" class="form-control" readonly value="{{$order->city ? $order->city->name : ''}}" name="postal_code" id="postal_code"
                                                 placeholder="Postal Code" />
                                         </div>
                                         <div class="form-group">
                                             <label for="status">Status</label>
+                                            @if($order->orderItems[0]->status == 4)
+                                            <input  class="form-control" readonly value="Delivered" name="postal_code" id="postal_code"/>
+                                            @else
                                             <select class="form-control" name="status" id="status" style="width: 100%;">
                                                 @foreach ($statuses as $status)
-                                                <option value="{{$status->id}}" @if($order->orderItems->first()->status == $status->id) selected @endif>{{$status->title}}</option>
+                                                <option value="{{$status->id}}" @if($order->orderItems[0]->status == $status->id) selected @endif>{{$status->title}}</option>
                                                 @endforeach
                                             </select>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -106,12 +110,15 @@
                             </tr>
                           </thead>
                           <tbody>
+
                             @foreach ($order->orderItems as $item)
                             <tr>
                               <td>{{$item->id}}</td>
                               <td>
                                 <div class="d-flex align-items-center">
-                                  <img style="border-radius: 0 !important;" src="{{$item->product->img ? asset('assets/images/product/'.$item->product->img) : asset('assets/images/faces/face1.jpg')}}" alt="image" />
+                                  @foreach($item->product->media as $media)
+                                  <img style="border-radius: 0 !important;" src="{{$media ? asset('assets/images/product/'.$media->file) : asset('assets/images/faces/face1.jpg')}}" alt="image" />
+                                  @endforeach
                                   <div class="table-user-name ml-3">
                                     <p class="mb-0 font-weight-medium"> {{$item->product->title}} </p>
                                   </div>

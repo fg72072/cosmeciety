@@ -17,8 +17,16 @@ class ContestController extends Controller
     
     public function index()
     {
-        $contests = Contest::get();      
-        return view('contests.list',compact('contests'));
+        $contests = Contest::get();
+        $type = '';      
+        return view('contests.list',compact('contests','type'));
+    }
+
+    public function upcoming()
+    {
+        $contests = Contest::where('contest_live_date','>=',now()->format('Y/m/d H:i'))->get();
+        $type = 'upcoming';      
+        return view('contests.list',compact('contests','type'));
     }
 
     public function create()
@@ -29,7 +37,7 @@ class ContestController extends Controller
     public function store(Request $req)
     {
         $validate = Request()->validate([
-            'banner' => 'required',
+            'banner' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1000',
             // 'banner' => 'required|dimensions:max_width=60,max_height=55',
             'title' => 'required',
             'description' => 'required|string',
@@ -59,7 +67,7 @@ class ContestController extends Controller
         $contest->result_announce_date = $req->result_announce_date;
         $contest->status = $req->status;
         $contest->save();
-        return back();
+        return back()->with(['msg_success'=>'Contest has been added.']);
     }
 
     public function edit($id)

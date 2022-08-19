@@ -13,7 +13,17 @@ use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
-    
+    public function index()
+    {
+        $orders = Order::with('user','orderItems.product.seller','orderItems.deliveryStatus','country:id,name','city:id,name')
+        ->where('user_id',JWTAuth::user()->id)->whereHas('orderItems.deliveryStatus',function($q){
+            $q->where('title','!=','Cancel');
+        })->get();
+        return response()->json([
+            'success' => true,
+            'orders' => $orders
+        ]);
+    }
     public function store(Request $req)
     {
         $validate = Request()->validate([
@@ -23,7 +33,8 @@ class OrderController extends Controller
             'address' => 'required',
             'country' => 'required',
             'city' => 'required',
-            'postal_code' => 'required'
+            'postal_code' => 'required',
+            'cart' => 'required'
         ]);
         try{
             $carts = json_decode($req->cart);
@@ -78,7 +89,7 @@ class OrderController extends Controller
             }
             }
             catch(\Exception $e){
-                return response()->json(['success'=>false,'data'=>$e],400);
+                return response()->json(['success'=>false,'data'=>'something goes wrong.'],400);
         }
     }
 

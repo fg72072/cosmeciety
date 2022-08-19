@@ -42,7 +42,14 @@
                       <td>{{$product->id}}</td>
                       <td>
                         <div class="d-flex align-items-center">
-                          <img src="{{asset('assets/images/product/'.$product->img)}}" alt="image" />
+                          <div>
+                          @foreach($product->media as $media)
+                          <img src="{{asset('assets/images/product/'.$media->file)}}" alt="image" />
+                          <!-- @if($loop->count == 3)
+                          <br>
+                          @endif -->
+                          @endforeach
+                          </div>
                           <div class="table-user-name ml-3">
                             <p class="mb-0 font-weight-medium"> {{$product->title}} </p>
                           </div>

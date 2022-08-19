@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                   <label for="status">Status</label>
-                  <select class="form-control" name="status" id="status" style="width: 100%;">
+                  <select class="form-control js-example-basic-single" name="status" id="status" style="width: 100%;">
                       <option value="1" @if($topic->status == 1) selected @endif>Active</option>
                       <option value="0" @if($topic->status == 0) selected @endif>Unactive</option>
                     </select>

@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="text-center sidebar-brand-wrapper d-flex align-items-center">
-      <a class="sidebar-brand brand-logo" href="{{url('index')}}"><img src="{{asset('assets/images/logo.png')}}" alt="logo" /></a>
-      <a class="sidebar-brand brand-logo-mini pl-4 pt-3" href="{{url('index')}}"><img src="{{asset('assets/images/logo.png')}}" alt="logo" /></a>
+      <a class="sidebar-brand brand-logo" href="{{url('/')}}"><img src="{{asset('assets/images/logo.png')}}" alt="logo" /></a>
+      <a class="sidebar-brand brand-logo-mini pl-4 pt-3" href="{{url('/')}}"><img src="{{asset('assets/images/logo.png')}}" alt="logo" /></a>
     </div>
     <ul class="nav">
       {{-- <li class="nav-item nav-profile">
@@ -47,6 +47,21 @@
           <span class="menu-title">Users</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url('user/barber')}}">
+          <i class="mdi mdi-content-cut menu-icon"></i>
+          <span class="menu-title">Barbers</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url('user/seller')}}">
+          <i class="mdi mdi-content-cut menu-icon"></i>
+          <span class="menu-title">Sellers</span>
+          @if($v_seller_count)
+          <span class="badge badge-danger text-white ml-3 rounded unseen-order-count">{{$v_seller_count}}</span>
+          @endif
+        </a>
+      </li>
       @endrole
       @role('super-admin')
       <li class="nav-item">
@@ -61,8 +76,10 @@
         <a class="nav-link" href="{{url('order')}}">
           <i class="mdi mdi-content-cut menu-icon"></i>
           <span class="menu-title">Orders</span>
+          @if($v_order_count)
+          <span class="badge badge-danger text-white ml-3 rounded unseen-order-count">{{$v_order_count}}</span>
+          @endif
         </a>
-    
       </li>
       @endrole
       @role('super-admin')
@@ -86,12 +103,18 @@
           <span class="menu-title">Contest</span>
         </a>
       </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="{{url('contest/upcoming')}}">
+          <i class="mdi mdi-content-cut menu-icon"></i>
+          <span class="menu-title">Upcoming Contest</span>
+        </a>
+      </li> -->
       @endrole
       @role('super-admin')
       <li class="nav-item">
         <a class="nav-link" href="{{url('transaction')}}">
           <i class="mdi mdi-content-cut menu-icon"></i>
-          <span class="menu-title">Transaction</span>
+          <span class="menu-title">Billing</span>
         </a>
       </li>
       @endrole

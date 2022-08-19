@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-
+use JWTAuth;
 class User extends Authenticatable implements MustVerifyEmail , JWTSubject
 {
     use Notifiable,HasRoles,SoftDeletes;
@@ -20,6 +20,8 @@ class User extends Authenticatable implements MustVerifyEmail , JWTSubject
     protected $fillable = [
         'name', 'email','img','phone','operational_hours','location', 'password',
     ];
+
+    protected $appends = ['full_image'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -58,4 +60,27 @@ class User extends Authenticatable implements MustVerifyEmail , JWTSubject
     {
         return $this->hasMany(WorkingDay::class, 'user_id', 'id');
     }
+
+    function favourite()
+    {
+        return $this->hasOne(Favourite::class, 'favourite_against', 'id')->where('user_id',JWTAuth::user()->id);
+    }
+    
+    function friends()
+    {
+        return $this->hasOne(Friend::class, 'user_id','id');
+    }
+
+    public function getFullImageAttribute(){
+
+        if($this->img){
+
+            return url('/').'/public/assets/images/user/'.$this->img;
+        }
+        else{
+            return null;
+        }
+
+    }
+    
 }

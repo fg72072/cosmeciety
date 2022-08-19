@@ -73,12 +73,14 @@ class ServiceController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required',
+            'duration' => 'required',
 
         ]);
         try {
             $service = new Service;
             $service->title = $request->name;
             $service->price = $request->price;
+            $service->duration = $request->duration;
             $service->user_id = $data->id;
             $service->description = $request->description;
             $service->picture = $name;

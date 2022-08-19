@@ -132,31 +132,31 @@
                   <input type="hidden" name="change_pass" value="yes"/>
                   <div class="form-group">
                     <label for="current_password">Current Password</label>
-                    <input type="password" required class="form-control" name="current_password" id="current_password" placeholder="Current Password" />
+                    <input type="password" required class="form-control" name="current_password"  id="current_password" placeholder="Current Password" />
                     @error('current_password')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
                     </div>
                     @enderror
-                  
+                        @if(session('error'))
+                      <div class="mt-1">
+                        <span class="text-danger">{{session('error')}}</span>
+                      </div>
+                      @endif
                     </div>
                   <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" name="password" id="password" placeholder="Password" />
+                  <label for="password">New Password</label>
+                  <input type="password" class="form-control" name="password" id="password" required placeholder="New Password" />
                   @error('password')
                   <div class="mt-1">
                     <span class="text-danger">{{$message}}</span>
                   </div>
                   @enderror
-                  @if(session('error'))
-                  <div class="mt-1">
-                    <span class="text-danger">{{session('error')}}</span>
-                  </div>
-                  @endif
+           
                   </div>
                   <div class="form-group">
-                  <label for="password_confirmation">Confirm Password</label>
-                  <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" />
+                  <label for="password_confirmation">Confirm New Password</label>
+                  <input type="password" class="form-control" name="password_confirmation" required id="password_confirmation" placeholder="Confirm New Password" />
                   @if (session('success'))
                   <div class="mt-1">
                     <span class="text-success">{{session('success')}}</span>

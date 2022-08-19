@@ -4,11 +4,11 @@
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title">Transaction</h3>
+        <h3 class="page-title">Billing</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Transaction</li>
+            <li class="breadcrumb-item active" aria-current="page">Billing</li>
           </ol>
         </nav>
       </div>
@@ -24,6 +24,7 @@
                     <tr>
                       <th>ID</th>
                       <th>User</th>
+                      <th>Order ID</th>
                       <th>Txn ID</th>
                       <th>Amount</th>
                       <th>Description</th>
@@ -35,6 +36,7 @@
                    <tr>
                     <td>{{$transaction->id}}</td>
                     <td>{{$transaction->user->name}}</td>
+                    <td>{{$transaction->payment_againts}}</td>
                     <td>{{$transaction->txn_id}}</td>
                     <td>${{$transaction->amount}}</td>
                     <td>{{$transaction->description ? $transaction->description : '-'}}</td>

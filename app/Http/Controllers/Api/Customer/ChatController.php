@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Customer;
 
 use JWTAuth;
-use App\Like;
+use App\User;
 use App\Post;
 use App\Media;
 use App\Friend;
@@ -67,7 +67,16 @@ class ChatController extends Controller
 
     public function getChatUser()
     {
-        $users = DB::select('SELECT messages.friendship_id,messages.created_at,friends.user_id,users.* FROM `messages` INNER JOIN friendships ON friendships.id=messages.friendship_id INNER JOIN friends ON friends.friendship_id=friendships.id INNER JOIN users ON users.id=friends.user_id WHERE friends.user_id!='.JWTAuth::user()->id.' GROUP BY messages.friendship_id');
+        // $users = DB::select('SELECT users.id as user_id,users.name,users.img,messages.id,messages.friendship_id,messages.user_id as sender_id,messages.body,messages.is_seen,(SELECT COUNT(*)FROM messages WHERE friends.user_id!='.JWTAuth::user()->id.' AND is_seen IS NULL) AS total_unread,messages.created_at,friends.user_id FROM `messages` INNER JOIN friendships ON friendships.id=messages.friendship_id INNER JOIN friends ON friends.friendship_id=friendships.id INNER JOIN users ON users.id=friends.user_id WHERE friends.user_id!='.JWTAuth::user()->id.' GROUP BY messages.friendship_id ORDER BY messages.created_at DESC');
+        $user_id=JWTAuth::user()->id;
+        $friendsid=DB::select('SELECT GROUP_CONCAT(friends.friendship_id) AS friendship_id FROM friendships INNER JOIN friends ON friends.friendship_id=friendships.id WHERE friends.user_id='.$user_id);
+        $users = User::select('users.*','friends.request_type','friends.created_at','friends.updated_at','friends.friendship_id')->where('users.id','!=',$user_id)->join('friends','users.id','=','friends.user_id')
+        ->whereIn('friends.friendship_id',explode(",",$friendsid[0]->friendship_id))
+        ->get();
+        foreach($users as $user){
+            $user->unread_total = Message::where([['friendship_id',$user->friendship_id],['user_id','!=',$user_id],['is_seen','=',null]])->orderBy('created_at','desc')->count();
+            $user->message = Message::where('friendship_id',$user->friendship_id)->orderBy('created_at','desc')->first();
+        }
         return response()->json([
             'success' => true,
             'users' => $users,

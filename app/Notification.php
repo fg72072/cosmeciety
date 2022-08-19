@@ -26,4 +26,9 @@ class Notification extends Model
         $noti->type = $type;
         $noti->save();
     }
+
+    public function booking()
+    {
+        return $this->belongsTo(Booking::class,'notification_against','id')->where('type','0');
+    }
 }

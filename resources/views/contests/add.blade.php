@@ -22,7 +22,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <div id="profile-container">
-                      <img class="" id="profileImage" src="" alt="Upload Banner" data-holder-rendered="true" max-height="10px;" max-width="100px;" style="height:100px;width:100px;">
+                      <img class="" id="profileImage" src="{{asset('assets/images/avatar.png')}}" alt="Upload Banner" data-holder-rendered="true" max-height="10px;" max-width="100px;" style="height:100px;width:100px;">
                   </div>
                   <br>
                   <input id="imageUpload" type="file" name="banner" placeholder="Photo" capture="" value="">
@@ -115,7 +115,7 @@
                   </div>
                   <div class="form-group">
                       <label for="status">Status</label>
-                      <select class="form-control" name="status" id="status" style="width: 100%;">
+                      <select class="form-control js-example-basic-single" name="status" id="status" style="width: 100%;">
                           <option value="1">Active</option>
                           <option value="0">Unactive</option>
                         </select>

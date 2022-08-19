@@ -29,7 +29,7 @@ class CategoryController extends Controller
         $category->title = $req->title;
         $category->status = $req->status;
         $category->save();
-        return back();
+        return back()->with(['msg_success'=>'Category has been added.']);
     }
 
     public function edit($id)
@@ -51,7 +51,7 @@ class CategoryController extends Controller
         $category->title = $req->title;
         $category->status = $req->status;
         $category->save();
-        return back();
+        return back()->with(['msg_success'=>'Category has been updated.']);
     }
 
     public function destroy($id)

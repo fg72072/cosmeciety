@@ -52,6 +52,9 @@ class ProfileController extends Controller
             if (isset($request->business_about)) {
                 $data->business_about = $request->business_about;
             }
+            if(isset($request->seats)){
+                $data->seats = $request->seats;
+            }
             if (isset($request->password)) {
                 $data->password = Hash::make($request->password);
                 Notification::notification(JWTAuth::user()->id,0,0,'Password Change','Your Password has been changed successfully','0');
@@ -63,7 +66,7 @@ class ProfileController extends Controller
                 ]);
                 $image = $request->file('img');
                 $name  = $this->media->getFileName($image);
-                $path  = $this->media->getProfilePicPath('profile');
+                $path  = $this->media->getProfilePicPath('user');
                 $image->move($path, $name);
 
                 $data->img = $name;
@@ -72,7 +75,7 @@ class ProfileController extends Controller
             if ($data->save()) {
                 return  response()->json([
                     'success' => true,
-                    'message' => 'Profile Updated Successfully'
+                    'message' => 'Profile Updated Successfully',
                 ]);
             }
         } catch (Exception $e) {
@@ -139,5 +142,14 @@ class ProfileController extends Controller
         } catch (Exception $e) {
             return response()->json(['success' => false, 'message' => 'Something Went Wrong'], 400);
         }
+    }
+
+    public function getWorkingDays()
+    {
+        $user = User::with('workingdays.day')->find(JWTAuth::user()->id);
+        return response()->json([
+            'success' => true,
+            'user' => $user
+        ]);
     }
 }

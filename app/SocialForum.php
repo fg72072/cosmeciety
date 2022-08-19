@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SocialForum extends Model
 {
     use SoftDeletes;
-    
+  
+    protected $appends = ['expended'];
     function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
@@ -22,5 +23,10 @@ class SocialForum extends Model
     public function topiccomments()
     {
         return $this->hasMany(Comment::class, 'post_id', 'id')->where('type', '0')->where('status','1');
+    }
+
+    public function getExpendedAttribute()
+    {
+        return false;
     }
 }

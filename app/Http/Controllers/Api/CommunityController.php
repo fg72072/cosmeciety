@@ -16,7 +16,13 @@ class CommunityController extends Controller
         $social_forums = SocialForum::withCount('topiccomments')->with('user:id,img','topiccomments.user:id,img,name')
         ->where('status','1');
         if($req->type == 'trending'){
-            $social_forums = $social_forums->withCount('topiccomments')->orderBy('topic_comments_count','Desc');
+            $social_forums = $social_forums->withCount('topiccomments')->orderBy('topiccomments_count','Desc');
+        }
+        else if($req->type == 'new'){
+            $social_forums = $social_forums->orderBy('id','Desc');
+        }
+        else if($req->type == 'active'){
+            $social_forums = $social_forums->where('status','1');
         }
         else{
             $social_forums = $social_forums->orderBy('id','Desc');

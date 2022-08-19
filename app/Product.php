@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use JWTAuth;
 class Product extends Model
 {
     use SoftDeletes;
@@ -17,6 +17,11 @@ class Product extends Model
     function seller()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    function media()
+    {
+        return $this->hasMany(Media::class, 'media_against', 'id')->where('type', '6');
     }
 
     public static function stock($id){
@@ -40,5 +45,15 @@ class Product extends Model
     public static function getPurchasePrice($id){
         $product_purchase_price = Inventory::where('stock_type','in')->where('p_id',$id)->orderBy('id','Desc')->pluck('purchase_price')->first();
         return $product_purchase_price;
+    }
+
+    function favourite()
+    {
+        return $this->hasOne(Favourite::class, 'favourite_against', 'id')->where('type','3')->where('user_id',JWTAuth::user()->id);
+    }
+
+    function orderitems()
+    {
+        return $this->hasMany(OrderItem::class, 'p_id', 'id');
     }
 }

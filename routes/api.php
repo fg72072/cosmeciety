@@ -30,6 +30,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('profile/upload_media', 'ProfileController@upload_media');
         Route::post('profile/update/working-day/{id}', 'ProfileController@updateWorkingDays');
         Route::get('profile', 'ProfileController@index');
+        Route::get('working/day', 'ProfileController@getWorkingDays');
 
         Route::get('community-forum', 'CommunityController@index');
         Route::get('community-forum/{id}', 'CommunityController@show');
@@ -48,6 +49,7 @@ Route::group(['namespace' => 'Api'], function () {
 
         Route::post('promotion/add','PromotionController@addPromotion');
         Route::get('promotion','PromotionController@getPromotion');
+        Route::get('promotion/all','PromotionController@getAllPromotion');
         Route::get('promotion/delete/{id}','PromotionController@removePromotion');
 
         Route::get('notifications','NotificationController@index');
@@ -61,6 +63,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::group(['prefix'=>'customer','namespace' => 'Customer','middleware'=>['auth.jwt','lastseen']], function () {
         Route::get('barbers', 'ServiceController@barber');
         Route::get('barber/{id}', 'ServiceController@showBarber');
+        Route::get('barber/slots/{id}', 'ServiceController@availableSlots');
         Route::get('services/{id}', 'ServiceController@showBarberService');
 
         Route::get('post', 'PostController@index');
@@ -73,10 +76,15 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('add-to-friend/{id}', 'FriendController@store');
         Route::post('accept-friend/{id}', 'FriendController@accept');
         Route::post('reject-friend/{id}', 'FriendController@reject');
+        Route::get('social/users', 'SocialUserController@getUsers');
+        Route::get('social/user/{id}', 'SocialUserController@getUsersById');
 
 
         Route::get('favourite', 'FavouriteController@index');
         Route::post('add-to-favourite/{id}', 'FavouriteController@addToFavourite');
+
+        Route::get('bookings','BookingController@index');
+        Route::post('booking/store','BookingController@store');
     });
 
 
@@ -86,10 +94,15 @@ Route::group(['namespace' => 'Api'], function () {
         Route::post('service/add','ServiceController@store');
         Route::get('store','StoreController@store');
         Route::get('store/{id}','StoreController@showStore');
-
+        
         Route::get('product','StoreController@product');
-
+        Route::get('product/popular','StoreController@popularProduct');
+        
+        Route::get('myorders','OrderController@index');
         Route::post('order','OrderController@store');
+        Route::get('booking','BookingController@index');
+        Route::post('booking/accept-or-reject/{id}','BookingController@acceptOrReject');
+        Route::get('occupancy','OccupancyController@index');
     });
 });
 

@@ -4,11 +4,11 @@
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title">List User</h3>
+        <h3 class="page-title">List {{$type}}</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">List User</li>
+            <li class="breadcrumb-item active" aria-current="page">List {{$type}}</li>
           </ol>
         </nav>
       </div>
@@ -30,7 +30,7 @@
                       {{-- <th>Operational Hours</th> --}}
                       <th>Location</th>
                       <th>Status</th>
-                      <th>Action</th>
+                      <!-- <th>Action</th> -->
                     </tr>
                   </thead>
                   <tbody>
@@ -64,10 +64,10 @@
                       </form>
                       @endif
                     </td>
-                    <td>
+                    <!-- <td>
                       <div class="btn-flex">
-                          <!-- <a href="{{url('user/edit/'.$user->id)}}" class="btn text-white btn-success btn-icon-text">
-                              <i class="mdi mdi-pencil-box-outline btn-icon-prepend"></i> Edit </a> -->
+                          <a href="{{url('user/edit/'.$user->id)}}" class="btn text-white btn-success btn-icon-text">
+                              <i class="mdi mdi-pencil-box-outline btn-icon-prepend"></i> Edit </a>
                           <form action="{{url('user/delete/'.$user->id)}}" method="post" class="delete-form">
                           @csrf
                               <button type="submit" class="btn btn-danger btn-icon-text">
@@ -75,7 +75,7 @@
                           </form>
                       
                       </div>
-                    </td>
+                    </td> -->
                   </tr>
                    @endforeach
                   </tbody>

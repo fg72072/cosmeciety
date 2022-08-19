@@ -56,7 +56,7 @@ class OtpController extends Controller
             'user' => 'required',
             'otp' => 'required',
         ]);
-        $otp = AppOtp::orderBy('id','desc')->with('user')->whereHas('user',function($q) use($req){
+        $otp = AppOtp::orderBy('id','desc')->with('user.roles')->whereHas('user',function($q) use($req){
             $q->where('email',$req->user)->orWhere('phone',$req->user);
         })->where('otp',$req->otp)->where('verify','0')->first();
         $token = '';
@@ -73,7 +73,7 @@ class OtpController extends Controller
                 return response()->json([
                     'success' => true,
                     'token' => $token,
-                    'user'=>JWTAuth::user(),
+                    'user'=>$otp->user,
                 ]);
             }
         }

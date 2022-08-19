@@ -28,12 +28,13 @@
                 </div>
                 <div class="form-group">
                   <label for="status">Status</label>
-                  <select class="form-control" name="status" id="status" style="width: 100%;">
+                  <select class="form-control js-example-basic-single" name="status" id="status" style="width: 100%;">
                       <option value="1" @if($category->status == 1) selected @endif>Active</option>
                       <option value="0" @if($category->status == 0) selected @endif>Unactive</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2"> Update </button>
+                <a href="{{url('category')}}"  class="btn btn-secondary mr-2"> Cancel </a>
               </form>
             </div>
           </div>

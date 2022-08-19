@@ -17,8 +17,11 @@ use Illuminate\Support\Facades\Session;
 
 Auth::routes();
 Auth::routes(['verify' => true]);
-
-Route::group(['prefix' => '', 'middleware' => ['auth','verified']], function () {
+Route::get('/clear', function () {
+    \Artisan::call('optimize:clear');
+    
+});
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::get('/', 'IndexController@index')->middleware(['role:seller|super-admin','permission:View']);
     Route::get('admin/404', function () {
         return view('404');
@@ -32,16 +35,25 @@ Route::group(['prefix' => '', 'middleware' => ['auth','verified']], function () 
         Route::get('/edit/{id}', 'ProductController@edit');
         Route::post('/update/{id}', 'ProductController@update');
         Route::post('/delete/{id}', 'ProductController@destroy');
+
+        Route::get('/delete-media/{id}', 'ProductController@deleteMedia');
+        Route::post('/upload-media/{id}', 'ProductController@uploadMedia');
+
+        
     });
 
     Route::group(['prefix' => 'inventory'], function () {
         Route::get('/create', 'InventoryController@create');
+        Route::get('/get-product/{id}', 'InventoryController@getProductByCategory');
+        Route::get('/get-product-stock/{id}', 'InventoryController@getProductStock');
         Route::post('/create', 'InventoryController@store')->name('inventory.store');
     });
 
     Route::group(['prefix' => 'user'], function () {
         Route::group(['middleware' => ['role:super-admin']], function () {
             Route::get('/', 'UserController@index');
+            Route::get('/seller', 'UserController@seller');
+            Route::get('/barber', 'UserController@barber');
             // Route::get('/create', 'UserController@create');
             // Route::post('/create', 'UserController@store')->name('user.store');
             Route::post('/delete/{id}', 'UserController@destroy');
@@ -90,6 +102,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth','verified']], function () 
 
     Route::group(['prefix' => 'contest','middleware' => ['role:super-admin']], function () {
         Route::get('/', 'ContestController@index');
+        Route::get('/upcoming', 'ContestController@upcoming');
         Route::get('/create', 'ContestController@create');
         Route::post('/create', 'ContestController@store')->name('contest.store');
         Route::get('/edit/{id}', 'ContestController@edit');

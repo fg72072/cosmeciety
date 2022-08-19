@@ -19,7 +19,28 @@ class UserController extends Controller
 
     public function index()
     {
-        $data['users'] = User::with('roles')->get();
+        $data['users'] = User::with('roles')->whereHas('roles',function($q){
+            $q->where('name','user');
+        })->get();
+        $data['type'] = 'User';
+        return view('user.list',$data);
+    }
+    public function barber()
+    {
+        $data['users'] = User::with('roles')->whereHas('roles',function($q){
+            $q->where('name','barber');
+        })->get();
+        $data['type'] = 'Barber';
+
+        return view('user.list',$data);
+    }
+    public function seller()
+    {
+        $data['users'] = User::with('roles')->whereHas('roles',function($q){
+            $q->where('name','seller');
+        })->get();
+        $data['type'] = 'Seller';
+
         return view('user.list',$data);
     }
 
@@ -84,16 +105,16 @@ class UserController extends Controller
         if(Auth::user()->id == $id){
         if(Auth::user()->email != $req->email){
 
-            $email_validate = "required|email|unique:users";
+            $email_validate = "required|max:255|email|unique:users";
         }
         else{
-            $email_validate = "required";
+            $email_validate = "required|max:255";
         }
         if(!$req->change_pass){
             $validate = Request()->validate([
-                'name'=>'required',
+                'name'=>'required|max:255',
                 'email'=>$email_validate,
-                'phone'=>'required',
+                'phone'=>'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:11|max:20',
             ]);
             Auth::user()->update([
                 'name'=>$req->name,
@@ -107,13 +128,13 @@ class UserController extends Controller
         if($req->change_pass){
             if (Hash::check($req->current_password, Auth::user()->password)) {
                 $validate = Request()->validate([
-                    'current_password' => 'required',
-                    'password' => 'required|min:8|confirmed'
+                    'current_password' => 'required|min:8|max:20',
+                    'password' => 'required|min:8|max:20|confirmed'
                 ]);
                 Auth::user()->update([
                     'password'=> Hash::make($req->password),
                 ]);
-                return redirect()->back()->with(['success'=>'Your password has been changed']);
+                return redirect()->back()->with(['msg_success'=>'Your password has been changed','success'=>'Your password has been changed']);
             } else {
                 return redirect()->back()->with(['error'=>'The provided password does not match your current password.']);
             }
@@ -124,12 +145,12 @@ class UserController extends Controller
             if($role[0] == 'super-admin'){
             $email_validate = "required";
             if($user->email != $req->email){
-                $email_validate = "required|email|unique:users";
+                $email_validate = "required|max:255|email|unique:users";
             }
             $validate = Request()->validate([
                 'email'=>$email_validate,
-                'name'=>'required',
-                'phone'=>'required',
+                'name'=>'required|max:255',
+                'phone'=>'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:11|max:20',
                 'status'=>'required',
             ]);
             $user->name = $req->name;
@@ -141,7 +162,7 @@ class UserController extends Controller
             }
         }        
         $user->save();
-        return back();
+        return back()->with(['msg_success'=>'Profile has been updated.']);
     }
 
     public function destroy($id)

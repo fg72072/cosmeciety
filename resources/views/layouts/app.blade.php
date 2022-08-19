@@ -25,9 +25,39 @@
             @include('includes.header')
         @yield('content')
       </div>
-
     </div>
+    <!-- Modal -->
+        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="msg_success">
+                    {{session('msg_success')}}
+                </h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    <script>
+        var base_url = "{{url('')}}";
+    </script>
     @stack('scripts')
     @include('includes.footer')
+    @if(session('msg_success'))
+    <script>
+        $(document).ready(function(){
+            $("#success").modal("show")
+        })
+    </script>
+    @endif
 </body>
 </html>

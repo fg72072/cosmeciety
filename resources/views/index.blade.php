@@ -22,6 +22,7 @@
               <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
                 <div class="card bg-warning">
                   <div class="card-body px-3 py-4">
+                  <a href="{{url('user')}}" class="normal-anchor">
                     <div class="d-flex justify-content-between align-items-start">
                       <div class="color-card">
                         <p class="mb-0 color-card-head">Users</p>
@@ -30,6 +31,39 @@
                       </div>
                       <i class="card-icon-indicator mdi mdi-account-circle bg-inverse-icon-warning"></i>
                     </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
+                <div class="card bg-warning">
+                  <div class="card-body px-3 py-4">
+                  <a href="{{url('user/barber')}}" class="normal-anchor">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div class="color-card">
+                        <p class="mb-0 color-card-head">Barbers</p>
+                        <h2 class="text-white"> {{$barber}}</span>
+                        </h2>
+                      </div>
+                      <i class="card-icon-indicator mdi mdi-account-circle bg-inverse-icon-warning"></i>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
+                <div class="card bg-warning">
+                  <div class="card-body px-3 py-4">
+                  <a href="{{url('user/seller')}}" class="normal-anchor">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div class="color-card">
+                        <p class="mb-0 color-card-head">Sellers</p>
+                        <h2 class="text-white"> {{$seller}}</span>
+                        </h2>
+                      </div>
+                      <i class="card-icon-indicator mdi mdi-account-circle bg-inverse-icon-warning"></i>
+                    </div>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -38,10 +72,43 @@
               <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
                 <div class="card bg-danger">
                   <div class="card-body px-3 py-4">
+                  <a href="{{url('product')}}" class="normal-anchor">
                     <div class="d-flex justify-content-between align-items-start">
                       <div class="color-card">
                         <p class="mb-0 color-card-head">Products</p>
                         <h2 class="text-white"> {{$product}}</span>
+                        </h2>
+                      </div>
+                      <i class="card-icon-indicator mdi mdi-cube-outline bg-inverse-icon-danger"></i>
+                    </div>
+                    </a>
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
+                <div class="card bg-danger">
+                  <div class="card-body px-3 py-4">
+                  <a href="{{url('product')}}" class="normal-anchor">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div class="color-card">
+                        <p class="mb-0 color-card-head">Top Product</p>
+                        <h2 class="text-white"> {{$top_product}}</span>
+                        </h2>
+                      </div>
+                      <i class="card-icon-indicator mdi mdi-cube-outline bg-inverse-icon-danger"></i>
+                    </div>
+                  </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
+                <div class="card bg-danger">
+                  <div class="card-body px-3 py-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div class="color-card">
+                        <p class="mb-0 color-card-head">Total Sales</p>
+                        <h2 class="text-white"> ${{$total_sales}}</span>
                         </h2>
                       </div>
                       <i class="card-icon-indicator mdi mdi-cube-outline bg-inverse-icon-danger"></i>
@@ -52,6 +119,7 @@
               <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3 pb-lg-0 pb-xl-3">
                 <div class="card bg-primary">
                   <div class="card-body px-3 py-4">
+                  <a href="{{url('order')}}" class="normal-anchor">
                     <div class="d-flex justify-content-between align-items-start">
                       <div class="color-card">
                         <p class="mb-0 color-card-head">Orders</p>
@@ -60,6 +128,23 @@
                       </div>
                       <i class="card-icon-indicator mdi mdi-briefcase-outline bg-inverse-icon-primary"></i>
                     </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3 pb-lg-0 pb-xl-3">
+                <div class="card bg-primary">
+                  <div class="card-body px-3 py-4">
+                  <a href="{{url('order?type=pending')}}" class="normal-anchor">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div class="color-card">
+                        <p class="mb-0 color-card-head">Pending Orders</p>
+                        <h2 class="text-white"> {{$pending_order}}</span>
+                        </h2>
+                      </div>
+                      <i class="card-icon-indicator mdi mdi-briefcase-outline bg-inverse-icon-primary"></i>
+                    </div>
+                  </a>
                   </div>
                 </div>
               </div>
@@ -68,6 +153,7 @@
               <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3 pb-lg-0 pb-xl-3">
                 <div class="card bg-success">
                   <div class="card-body px-3 py-4">
+                  <a href="{{url('contest')}}" class="normal-anchor">
                     <div class="d-flex justify-content-between align-items-start">
                       <div class="color-card">
                         <p class="mb-0 color-card-head">Contests</p>
@@ -75,6 +161,22 @@
                       </div>
                       <i class="card-icon-indicator mdi mdi-basket bg-inverse-icon-success"></i>
                     </div>
+                  </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3 pb-lg-0 pb-xl-3">
+                <div class="card bg-success">
+                  <div class="card-body px-3 py-4">
+                  <a href="{{url('contest/upcoming')}}" class="normal-anchor">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div class="color-card">
+                        <p class="mb-0 color-card-head">Upcoming Contest</p>
+                        <h2 class="text-white">{{$upcoming_contest}}</h2>
+                      </div>
+                      <i class="card-icon-indicator mdi mdi-basket bg-inverse-icon-success"></i>
+                    </div>
+                  </a>
                   </div>
                 </div>
               </div>

@@ -3,7 +3,7 @@
 <div class="main-panel">
     <div class="content-wrapper">
       <div class="page-header">
-        <h3 class="page-title">Add Poduct</h3>
+        <h3 class="page-title">Add Product</h3>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
@@ -19,11 +19,35 @@
                 @csrf
                 <div class="form-group">
                     <div id="profile-container">
-                      <img class="" id="profileImage" src="" alt="Upload Icon" data-holder-rendered="true" max-height="10px;" max-width="100px;" style="height:100px;width:100px;">
+
+                      <div class="gallery"></div>
+                      <!-- <img class="" id="profileImage" src="" alt="Upload Icon" data-holder-rendered="true" max-height="10px;" max-width="100px;" style="height:100px;width:100px;"> -->
                   </div>
                   <br>
-                  <input id="imageUpload" type="file" name="image" placeholder="Photo" capture="" value="" required>
+                  <input type="file" multiple id="gallery-photo-add" name="image[]">
+                 
+                  <!-- <input id="imageUpload" type="file" name="image[]" placeholder="Photo" capture="" value="" required> -->
                     @error('image')
+                    <div class="mt-1">
+                      <span class="text-danger">{{$message}}</span>
+                    </div>
+                    @enderror
+                    @error('image.0')
+                    <div class="mt-1">
+                      <span class="text-danger">{{$message}}</span>
+                    </div>
+                    @enderror
+                    @error('image.1')
+                    <div class="mt-1">
+                      <span class="text-danger">{{$message}}</span>
+                    </div>
+                    @enderror
+                    @error('image.2')
+                    <div class="mt-1">
+                      <span class="text-danger">{{$message}}</span>
+                    </div>
+                    @enderror
+                    @error('image.3')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
                     </div>
@@ -40,7 +64,7 @@
                 </div>
                 <div class="form-group">
                     <label for="price">Price</label>
-                    <input type="number" class="form-control" min="1" name="price" id="price" placeholder="Price" />
+                    <input type="number" class="form-control amount" min="1" name="price" id="price" placeholder="Price" />
                     @error('price')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
@@ -49,7 +73,7 @@
                 </div>
                 <div class="form-group">
                     <label for="purchase_price">Purchase Price</label>
-                    <input type="number" class="form-control" min="1" name="purchase_price" id="purchase_price" placeholder="Purchase Price" />
+                    <input type="number" class="form-control amount" min="1" name="purchase_price" id="purchase_price" placeholder="Purchase Price" />
                     @error('purchase_price')
                     <div class="mt-1">
                       <span class="text-danger">{{$message}}</span>
@@ -81,7 +105,7 @@
                 </div>
                 <div class="form-group">
                   <label for="status">Status</label>
-                  <select class="form-control" name="status" id="status" style="width: 100%;">
+                  <select class="form-control js-example-basic-single"  name="status" id="status" style="width: 100%;">
                       <option value="1">Active</option>
                       <option value="0">Unactive</option>
                     </select>

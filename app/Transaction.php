@@ -33,7 +33,7 @@ class Transaction extends Model
         return $type;
     }
 
-    public static function transaction($payment_against,$txn_id,$amount,$description = '',$type)
+    public static function transaction($payment_against,$txn_id,$amount,$description,$type)
     {
         $trans = new Transaction;
         $trans->user_id = JWTAuth::user()->id;
@@ -42,6 +42,6 @@ class Transaction extends Model
         $trans->amount = $amount;
         $trans->description = $description;
         $trans->type = $type;
-        $trans->save();
+        return $trans->save();
     }
 }

@@ -20270,13 +20270,13 @@ dl li {
 	height: 230px;
 }
 .sidebar .sidebar-brand-wrapper .sidebar-brand {
-	padding: 2.25rem 0 0.25rem 40px;
+	/*padding: 2.25rem 0 0.25rem 40px;*/
 }
 .rtl .sidebar .sidebar-brand-wrapper .sidebar-brand {
 	padding: 20px 61px 10px 0;
 }
 .sidebar .sidebar-brand-wrapper .sidebar-brand img {
-	width: calc(260px - 130px);
+	width: calc(400px - 130px);
 	max-width: 100%;
 	margin: auto;
 	vertical-align: middle;
@@ -21086,4 +21086,46 @@ background-color: white !important;
 	.custom-form-width{
 		width: 90%;
 	}	
+}
+.bg-light-danger{
+	background: #f39494 !important;
+}
+.delete-img-btn{
+position: absolute;
+right: 0;
+top: -10px;
+font-weight: 700;
+cursor: pointer;
+}
+.main-media-box:not(:first-child){
+margin-left: 1rem;
+}
+.normal-anchor,.normal-anchor:hover{
+	text-decoration: none;
+}
+#profile-container{
+	cursor: pointer;
+}
+.form-control.error{
+	border-color: red;
+}
+.msg_success{
+    color: #4c4949;
+    font-size: 26px;
+    line-height: 1.5;
+    letter-spacing: 2px;
+	text-align: center;
+}
+#success .modal-title{
+    color: #5F348C;
+}
+.card-body .text-center img{
+    width:200px;
+}
+.iti{
+	width: 100%;
+}
+.hide{
+	display: none;
+	color: red;
 }
